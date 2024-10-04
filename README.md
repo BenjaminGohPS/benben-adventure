@@ -1,5 +1,5 @@
 # Benben Adventure
 
-![Dark scary forest with green and yello tint, in the style of 2d anime](https://lexica.art/prompt/6601367b-b44f-4819-9ed7-68996d0aed31)
+![Dark scary forest with green and yellow tint, in the style of 2d anime](https://image.lexica.art/full_webp/a0ad1045-2e7c-44e9-afca-2cf952ae9448)
 
 Stay tune for more details.
