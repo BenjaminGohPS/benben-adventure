@@ -1,0 +1,28 @@
+body {
+  background-color: #101720;
+  /* border: 1px solid red; */
+}
+
+#game {
+  background-color: bisque;
+  max-width: 500px;
+}
+
+/*to check the div*/
+/* .boxes {
+  border: 1px solid red;
+} */
+
+#stats {
+  /* border: 1px solid #101720; */
+  padding: 10px;
+  /* display: flex;
+  justify-content: space-around; */
+}
+
+#controls,
+#stats,
+#monsterDetails {
+  /* border: 1px solid bisque; */
+  padding: 10px;
+}
