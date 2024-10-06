@@ -22,7 +22,8 @@ body {
 
 #controls,
 #stats,
-#monsterDetails {
+#monsterDetails,
+#text {
   /* border: 1px solid bisque; */
   padding: 10px;
 }
