@@ -1,3 +1,10 @@
+/*---------- Variables (state) ---------*/
+let hp = 100;
+let gold = 50;
+let xp = 0;
+let currentWeaponIndex = [0];
+let monsterIndex = 0;
+
 /*-------------- Constants -------------*/
 const areaImage = document.getElementById("areaImage");
 const hpText = document.getElementById("hpText");
@@ -14,6 +21,18 @@ const button3 = document.getElementById("button3");
 
 const text = document.getElementById("text");
 
+const monsters = [
+  {
+    name: "Slime",
+    level: 1,
+    hp: 5,
+  },
+  {
+    name: "Wolf",
+    level: 5,
+    hp: 20,
+  },
+];
 const locations = [
   {
     //location[0]
@@ -39,15 +58,26 @@ const locations = [
     //location[3]
     name: "Fight",
     buttonText: ["Attack", "Block", "Run"],
-    text: "You have engage the monster.", // think of how to amend the text based on which monster I am attacking
+    text: 'You have engage the monster.'
+    //; The ${monsters[monsterIndex].name}.`, // think of how to amend the text based on which monster I am attacking. The monsterIndex still not working for wolf. @@
   },
-];
-
-const monsters = [
   {
-    name: "Slime",
-    level: 1,
-    hp: 5,
+    //location[4]
+    name: "Win",
+    buttonText: ["Attack", "Block", "Run"],
+    text: `You have engage the monster; The ${monsters[monsterIndex].name}.`, // think of how to amend the text based on which monster I am attacking
+  },
+  {
+    //location[5] - Haven't amend it yet
+    name: "Lose",
+    buttonText: ["Attack", "Block", "Run"],
+    text: `You have engage the monster; The ${monsters[monsterIndex].name}.`,
+  },
+  {
+    //location[6]
+    name: "Inner Forest",
+    buttonText: ["Town", "Cave", "Fight Wolf"],
+    text: "You have enter the Inner Forest. With trunks as huge as a house, and branches reaching way up into the sky. You can't help but be in awe at the sheer magnitude of the trees in this region.\nThe way back to town is through the forest behind you. Ahead lies a cave with a huge entrance. Your instincts tells you, you have to be stronger before proceeding further.",
   },
 ];
 
@@ -55,19 +85,16 @@ const weapons = [
   { name: "trusty knuckles", power: 1 },
   { name: "The Stick", power: 5 },
 ];
-/*---------- Variables (state) ---------*/
-let hp = 100;
-let gold = 50;
-let xp = 0;
-let currentWeapon = weapons[0];
-console.log(weapons[0]);
 
 /*----- Cached Element References  -----*/
+console.log("currentWeaponIndex:" + weapons[0]); // why this cannot work
+console.log(weapons[0]); // this can show?
 
 /*-------------- Functions -------------*/
 //CHECKS
 console.log(locations[0].buttonText[0]);
 console.log(locations[1].buttonText[0]);
+console.log(monsterHp);
 
 const init = () => {
   //code to init the game
@@ -123,19 +150,31 @@ const goForest = () => {
 
 const goInnerForest = () => {
   //function on button when clicked to go inner forest
+  monsterIndex = 1;
+  console.log(monsters[monsterIndex].name);
+  button1.innerText = locations[6].buttonText[0];
+  button2.innerText = locations[6].buttonText[1];
+  button3.innerText = locations[6].buttonText[2];
+  text.innerText = locations[6].text;
+  button1.onclick = goTown;
+  button2.onclick = goCave;
+  button3.onclick = fightWolf;
+};
+
+const goCave = () => {
+  //function on button when clicked to go cave
 };
 
 const fightSlime = () => {
-  //function on button when clicked to go store
-
+  monsterIndex = 0;
   button1.innerText = locations[3].buttonText[0];
   button2.innerText = locations[3].buttonText[1];
   button3.innerText = locations[3].buttonText[2];
   text.innerText = `${locations[3].text} \n The Slime smiles at you while bouncing on the spot`;
 
   monsterDetails.style.display = "block";
-  monsterName.innerText = monsters[0].name;
-  monsterHp.innerText = monsters[0].hp;
+  monsterName.innerText = monsters[monsterIndex].name;
+  monsterHp.innerText = monsters[monsterIndex].hp;
 
   button1.onclick = goAttack;
   button2.onclick = goBlock;
@@ -146,10 +185,36 @@ const fightSlime = () => {
     {
       name: "Slime",
       level: 1,
-      health: 5,
+      hp: 5,
     },
   ];
 */
+};
+
+const fightWolf = () => {
+  monsterIndex = 1;
+
+  button1.innerText = locations[3].buttonText[0];
+  button2.innerText = locations[3].buttonText[1];
+  button3.innerText = locations[3].buttonText[2];
+  text.innerText = `${locations[3].text} \n The Wolf stares at you while bearing it's fangs menacingly`;
+
+  monsterDetails.style.display = "block";
+  monsterName.innerText = monsters[monsterIndex].name;
+  monsterHp.innerText = monsters[monsterIndex].hp;
+
+  button1.onclick = goAttack;
+  button2.onclick = goBlock;
+  button3.onclick = goTown;
+
+  /*
+    const monster = [
+      {
+    name: "Wolf",
+    level: 5,
+    hp: 20,
+  },
+  */
 };
 
 const fightDragon = () => {
@@ -158,6 +223,67 @@ const fightDragon = () => {
 
 const goAttack = () => {
   //attack codes
+  /* for easy ref
+  const weapons = [
+    { name: "trusty knuckles", power: 1 },
+    { name: "The Stick", power: 5 },
+  ];
+  */
+
+  // think simple first. how do you attack the slime?
+  let currentMonsterHp = monsterHp.innerText;
+  let currentHp = hpText.innerText;
+
+  if (monsterHp.innerText > 1) {
+    currentMonsterHp -= 1;
+    monsterHp.innerText = currentMonsterHp;
+    currentHp -= monsters[0].level;
+    hp.innerText = currentHp;
+    text.innerText = "You have attacked the monster";
+    console.log(`monsterHp = ${currentMonsterHp}`);
+  } else {
+    monsterDetails.style.display = "none";
+
+    defeatMonster();
+  }
+  //   if (monsterHp.innerText > 0) {
+  //     monsterHp -= 1;
+  //     monsterHp.innerText = monsterHp;
+  //     text.innerText = "You have attacked the monster";
+  //   } else {
+  //     monsterDetails.style.display = "none";
+  //     text.innerText = "You have defeated the monster";
+  //   }
+};
+
+const defeatMonster = () => {
+  gold += Math.floor(monsters[monsterIndex].level * 7);
+  goldText.innerText = gold;
+
+  xp += Math.floor(monsters[monsterIndex].level);
+  xpText.innerText = xp;
+
+  checkLocation();
+};
+
+const checkLocation = () => {
+  if (monsterIndex === 0) {
+    button1.innerText = locations[2].buttonText[0];
+    button2.innerText = locations[2].buttonText[1];
+    button3.innerText = locations[2].buttonText[2];
+    text.innerText = `You have defeated the ${monsters[monsterIndex].name}`;
+    button1.onclick = goTown;
+    button2.onclick = goInnerForest;
+    button3.onclick = fightSlime;
+  } else if (monsterIndex === 1) {
+    button1.innerText = locations[6].buttonText[0];
+    button2.innerText = locations[6].buttonText[1];
+    button3.innerText = locations[6].buttonText[2];
+    text.innerText = `You have defeated the ${monsters[monsterIndex].name}`;
+    button1.onclick = goTown;
+    button2.onclick = goCave;
+    button3.onclick = fightWolf;
+  }
 };
 
 const goBlock = () => {
