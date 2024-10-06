@@ -4,8 +4,9 @@ const hpText = document.getElementById("hpText");
 const goldText = document.getElementById("goldText");
 const xpText = document.getElementById("xpText");
 
+const monsterDetails = document.getElementById("monsterDetails");
 const monsterName = document.getElementById("monsterName");
-const monsterHealth = document.getElementById("monsterHealth");
+const monsterHp = document.getElementById("monsterHp");
 
 const button1 = document.getElementById("button1");
 const button2 = document.getElementById("button2");
@@ -38,15 +39,15 @@ const locations = [
     //location[3]
     name: "Fight",
     buttonText: ["Attack", "Block", "Run"],
-    text: 'You have engage the monster.', // think of how to amend the text based on which monster I am attacking
+    text: "You have engage the monster.", // think of how to amend the text based on which monster I am attacking
   },
 ];
 
-const monster = [
+const monsters = [
   {
     name: "Slime",
     level: 1,
-    health: 5,
+    hp: 5,
   },
 ];
 
@@ -72,6 +73,7 @@ const init = () => {
   //code to init the game
   console.log(`If initiation works, this text appears`);
 
+  monsterDetails.style.display = "none";
   button1.innerText = locations[0].buttonText[0];
   button2.innerText = locations[0].buttonText[1];
   button3.innerText = locations[0].buttonText[2];
@@ -98,6 +100,7 @@ const goShop = () => {
 
 const goTown = () => {
   //function on button when clicked to go town
+  monsterDetails.style.display = "none";
   button1.innerText = locations[0].buttonText[0];
   button2.innerText = locations[0].buttonText[1];
   button3.innerText = locations[0].buttonText[2];
@@ -124,20 +127,15 @@ const goInnerForest = () => {
 
 const fightSlime = () => {
   //function on button when clicked to go store
-  /* ref
-  button1.innerText = locations[2].buttonText[0];
-  button2.innerText = locations[2].buttonText[1];
-  button3.innerText = locations[2].buttonText[2];
-  text.innerText = locations[2].text;
-  button1.onclick = goTown;
-  button2.onclick = goInnerForest;
-  button3.onclick = fightSlime;
-  */
 
   button1.innerText = locations[3].buttonText[0];
   button2.innerText = locations[3].buttonText[1];
   button3.innerText = locations[3].buttonText[2];
   text.innerText = `${locations[3].text} \n The Slime smiles at you while bouncing on the spot`;
+
+  monsterDetails.style.display = "block";
+  monsterName.innerText = monsters[0].name;
+  monsterHp.innerText = monsters[0].hp;
 
   button1.onclick = goAttack;
   button2.onclick = goBlock;
@@ -173,6 +171,7 @@ const buyHp = () => {
     hp += 10;
     goldText.innerText = gold;
     hpText.innerText = hp;
+    text.innerText = "Your body fills with vitality!";
   } else {
     text.innerText =
       '"Looks like you ran out of gold.", says the Shopkeeper, as he looks at you judgementally.';
