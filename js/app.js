@@ -58,8 +58,7 @@ const locations = [
     //location[3]
     name: "Fight",
     buttonText: ["Attack", "Block", "Run"],
-    text: 'You have engage the monster.'
-    //; The ${monsters[monsterIndex].name}.`, // think of how to amend the text based on which monster I am attacking. The monsterIndex still not working for wolf. @@
+    text: `You have engage the monster.; The ${monsters[monsterIndex].name}.`, // think of how to amend the text based on which monster I am attacking. The monsterIndex still not working for wolf. @@
   },
   {
     //location[4]
@@ -235,11 +234,18 @@ const goAttack = () => {
   let currentHp = hpText.innerText;
 
   if (monsterHp.innerText > 1) {
-    currentMonsterHp -= 1;
+    // testing stats
+    currentMonsterHp -= Math.floor(Math.random() * xp) + 1;
+
+    // check for damage
+    console.log(`damaged dealt: ${Math.floor(Math.random() * xp) + 1}`);
+
     monsterHp.innerText = currentMonsterHp;
     currentHp -= monsters[0].level;
     hp.innerText = currentHp;
     text.innerText = "You have attacked the monster";
+
+    // check monster hp
     console.log(`monsterHp = ${currentMonsterHp}`);
   } else {
     monsterDetails.style.display = "none";
