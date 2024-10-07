@@ -53,9 +53,12 @@ const locations = [
   {
     //locations[0]
     name: "Town",
-    buttonText: ["Shop", "Forest", "Dragon"],
+    buttonText: ["Shop", "Forest", "Dragon Den"],
     // buttonFunction: [goShop, goForest, fightDragon],
     text: "You are now standing at the town square. To your left is the store. Up ahead is the forest. To the right of the town, lies the fearsome Dragon you have heard from the whispers going around town.",
+    image:
+      "https://image.lexica.art/full_webp/a0ad1045-2e7c-44e9-afca-2cf952ae9448",
+    alt: "girl standing in the entrance of a forest",
   },
   {
     //locations[1]
@@ -63,6 +66,9 @@ const locations = [
     buttonText: ["Town", "Buy HP", "Buy Weapon"],
     // buttonFunction: [goTown, buyHp, buyWeapon, ],
     text: "Ah, an adventurer! Come now, what can I do for you?",
+    image:
+      "https://image.lexica.art/full_webp/2cce2637-98ef-4e49-9682-aa352dbad992",
+    alt: "shop front",
   },
   {
     //locations[2]
@@ -154,7 +160,8 @@ const goShop = () => {
   button1.onclick = goTown;
   button2.onclick = buyHp;
   button3.onclick = buyWeapon;
-  button4.style.display = "none";
+  areaImage.src = locations[1].image;
+  areaImage.alt = locations[1].alt;
 };
 
 const goTown = () => {
@@ -168,6 +175,8 @@ const goTown = () => {
   button1.onclick = goShop;
   button2.onclick = goForest;
   button3.onclick = goDragon;
+  areaImage.src = locations[0].image;
+  areaImage.alt = locations[0].alt;
 };
 
 const goForest = () => {
@@ -179,7 +188,6 @@ const goForest = () => {
   button1.onclick = goTown;
   button2.onclick = goInnerForest;
   button3.onclick = fightSlime;
-  button4.style.display = "none";
 };
 
 const goInnerForest = () => {
@@ -193,7 +201,6 @@ const goInnerForest = () => {
   button1.onclick = goTown;
   button2.onclick = goCave;
   button3.onclick = fightWolf;
-  button4.style.display = "none";
 };
 
 const goCave = () => {
@@ -207,7 +214,6 @@ const goCave = () => {
   button1.onclick = goTown;
   button2.onclick = goInnerForest;
   button3.onclick = fightGoblin;
-  button4.style.display = "none";
 };
 
 const goDragon = () => {
@@ -437,6 +443,7 @@ const checkLocation = () => {
     button1.onclick = goTown;
     button2.onclick = goTown;
     button3.onclick = goTown;
+    // incomplete function
     button4.style.display = "block";
   }
 };
