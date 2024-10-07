@@ -124,7 +124,7 @@ const locations = [
 ];
 
 const weapons = [
-  { name: "trusty knuckles", power: 1 },
+  { name: "trusty knuckles", power: 100 },
   { name: "The Stick", power: 5 },
 ];
 
@@ -273,7 +273,7 @@ const fightIni = () => {
 const fightSlime = () => {
   monsterIndex = 0;
   fightIni();
-  text.innerText += "The Slime smiles at you while bouncing on the spot";
+  text.innerText += "The Slime smiles at you while bouncing on the spot.";
 
   /*
   const monster = [
@@ -290,7 +290,7 @@ const fightWolf = () => {
   monsterIndex = 1;
   fightIni();
   text.innerText +=
-    "The Wolf stares at you while bearing it's fangs menacingly";
+    "The Wolf stares at you while bearing it's fangs menacingly.";
 
   /*
     const monster = [
@@ -324,7 +324,7 @@ const fightDragon = () => {
   fightIni();
 
   text.innerText +=
-    "The Dragon stares at you, while arching it's body just like a cat, ready to pounce at you";
+    "The Dragon stares at you, while arching it's body just like a cat, ready to pounce at you.";
   button3.style.display = "block";
   /*
   {
@@ -419,6 +419,9 @@ const defeatMonster = () => {
 
   xp += Math.floor(monsters[monsterIndex].level);
   xpText.innerText = xp;
+  text.innerText = `You have defeated the ${monsters[monsterIndex].name}.
+  Gold obtained: ${Math.floor(monsters[monsterIndex].level * 3)}
+  XP obtained: ${Math.floor(monsters[monsterIndex].level)}`;
 
   checkLocation();
 };
@@ -428,7 +431,7 @@ const checkLocation = () => {
     button1.innerText = locations[2].buttonText[0];
     button2.innerText = locations[2].buttonText[1];
     button3.innerText = locations[2].buttonText[2];
-    text.innerText = `You have defeated the ${monsters[monsterIndex].name}`;
+
     button1.onclick = goTown;
     button2.onclick = goInnerForest;
     button3.onclick = fightSlime;
@@ -436,7 +439,7 @@ const checkLocation = () => {
     button1.innerText = locations[6].buttonText[0];
     button2.innerText = locations[6].buttonText[1];
     button3.innerText = locations[6].buttonText[2];
-    text.innerText = `You have defeated the ${monsters[monsterIndex].name}`;
+
     button1.onclick = goTown;
     button2.onclick = goCave;
     button3.onclick = fightWolf;
@@ -444,20 +447,20 @@ const checkLocation = () => {
     button1.innerText = locations[7].buttonText[0];
     button2.innerText = locations[7].buttonText[1];
     button3.innerText = locations[7].buttonText[2];
-    text.innerText = `You have defeated the ${monsters[monsterIndex].name}`;
+
     button1.onclick = goTown;
     button2.onclick = goInnerForest;
     button3.onclick = fightGoblin;
   } else if (monsterIndex === 3) {
-    button1.innerText = locations[8].buttonText[0];
-    button2.innerText = locations[8].buttonText[0];
-    button3.innerText = locations[8].buttonText[0];
+    button1.innerText = locations[9].buttonText[0];
+    button2.innerText = locations[9].buttonText[0];
+    button3.innerText = locations[9].buttonText[0];
     text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. Replay?`;
     button1.onclick = goReplay;
     button2.onclick = goReplay;
     button3.onclick = goReplay;
     // incomplete function
-    button4.style.display = "block";
+    // button4.style.display = "block";
   }
 };
 
