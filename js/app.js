@@ -230,12 +230,15 @@ const goDragon = () => {
   button3.onclick = "";
 };
 
-const fightSlime = () => {
-  monsterIndex = 0;
+const goReplay = () => {
+  //this function is to replay. same functions for winning or losing
+};
+
+const fightIni = () => {
   button1.innerText = locations[3].buttonText[0];
   button2.innerText = locations[3].buttonText[1];
   button3.innerText = locations[3].buttonText[2];
-  text.innerText = `${locations[3].text} \n The Slime smiles at you while bouncing on the spot`;
+  text.innerText = `${locations[3].text} \n`;
 
   monsterDetails.style.display = "block";
   monsterName.innerText = monsters[monsterIndex].name;
@@ -244,6 +247,11 @@ const fightSlime = () => {
   button1.onclick = goAttack;
   button2.onclick = goBlock;
   button3.onclick = goTown;
+};
+const fightSlime = () => {
+  monsterIndex = 0;
+  fightIni();
+  text.innerText += "The Slime smiles at you while bouncing on the spot";
 
   /*
   const monster = [
@@ -258,19 +266,9 @@ const fightSlime = () => {
 
 const fightWolf = () => {
   monsterIndex = 1;
-
-  button1.innerText = locations[3].buttonText[0];
-  button2.innerText = locations[3].buttonText[1];
-  button3.innerText = locations[3].buttonText[2];
-  text.innerText = `${locations[3].text} \n The Wolf stares at you while bearing it's fangs menacingly`;
-
-  monsterDetails.style.display = "block";
-  monsterName.innerText = monsters[monsterIndex].name;
-  monsterHp.innerText = monsters[monsterIndex].hp;
-
-  button1.onclick = goAttack;
-  button2.onclick = goBlock;
-  button3.onclick = goTown;
+  fightIni();
+  text.innerText +=
+    "The Wolf stares at you while bearing it's fangs menacingly";
 
   /*
     const monster = [
@@ -284,19 +282,9 @@ const fightWolf = () => {
 
 const fightGoblin = () => {
   monsterIndex = 2;
-
-  button1.innerText = locations[3].buttonText[0];
-  button2.innerText = locations[3].buttonText[1];
-  button3.innerText = locations[3].buttonText[2];
-  text.innerText = `${locations[3].text} \n 'FEE FIA FOE FUM', says the Goblin in a cave-rumbling voice.`;
-
-  monsterDetails.style.display = "block";
-  monsterName.innerText = monsters[monsterIndex].name;
-  monsterHp.innerText = monsters[monsterIndex].hp;
-
-  button1.onclick = goAttack;
-  button2.onclick = goBlock;
-  button3.onclick = goTown;
+  fightIni();
+  text.innerText +=
+    "'FEE FIA FOE FUM', says the Goblin in a cave-rumbling voice.";
 
   /*
     const monster = [
@@ -311,20 +299,11 @@ const fightGoblin = () => {
 const fightDragon = () => {
   //function on button when clicked to go fight dragon
   monsterIndex = 3;
+  fightIni();
+
+  text.innerText +=
+    "The Dragon stares at you, while arching it's body just like a cat, ready to pounce at you";
   button3.style.display = "block";
-  button1.innerText = locations[3].buttonText[0];
-  button2.innerText = locations[3].buttonText[1];
-  button3.innerText = locations[3].buttonText[2];
-  text.innerText = `${locations[3].text} \n The Dragon stares at you, while arching it's body just like a cat, ready to pounce at you`;
-
-  monsterDetails.style.display = "block";
-  monsterName.innerText = monsters[monsterIndex].name;
-  monsterHp.innerText = monsters[monsterIndex].hp;
-
-  button1.onclick = goAttack;
-  button2.onclick = goBlock;
-  button3.onclick = goTown;
-
   /*
   {
     name: "Dragon",
@@ -433,16 +412,16 @@ const checkLocation = () => {
     button3.innerText = locations[7].buttonText[2];
     text.innerText = `You have defeated the ${monsters[monsterIndex].name}`;
     button1.onclick = goTown;
-    button2.onclick = goCave;
+    button2.onclick = goInnerForest;
     button3.onclick = fightGoblin;
   } else if (monsterIndex === 3) {
-    button1.innerText = locations[7].buttonText[0];
-    button2.innerText = locations[7].buttonText[0];
-    button3.innerText = locations[7].buttonText[0];
+    button1.innerText = locations[8].buttonText[0];
+    button2.innerText = locations[8].buttonText[0];
+    button3.innerText = locations[8].buttonText[0];
     text.innerText = `You have defeated the ${monsters[monsterIndex].name}`;
-    button1.onclick = goTown;
-    button2.onclick = goTown;
-    button3.onclick = goTown;
+    button1.onclick = goReplay;
+    button2.onclick = goReplay;
+    button3.onclick = goReplay;
     // incomplete function
     button4.style.display = "block";
   }
