@@ -152,7 +152,7 @@ const init = () => {
   button3.onclick = goDragon;
   button4.style.display = "none";
 
-  hp = 1;
+  hp = 100;
   gold = 50;
   xp = 0;
   currentWeaponIndex = 0;
