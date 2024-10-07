@@ -58,7 +58,9 @@ const locations = [
     //location[3]
     name: "Fight",
     buttonText: ["Attack", "Block", "Run"],
-    text: `You have engage the monster.; The ${monsters[monsterIndex].name}.`, // think of how to amend the text based on which monster I am attacking. The monsterIndex still not working for wolf. @@
+    text: "You have engage the monster.",
+
+    // ; The ${monsters[monsterIndex].name}., // think of how to amend the text based on which monster I am attacking. The monsterIndex still not working for wolf. @@
   },
   {
     //location[4]
@@ -109,6 +111,7 @@ const init = () => {
   button3.onclick = fightDragon;
 };
 
+// is this needed?
 const render = () => {
   //code to render
 };
@@ -230,20 +233,29 @@ const goAttack = () => {
   */
 
   // think simple first. how do you attack the slime?
+  // next, how does the slime attack you?
+
   let currentMonsterHp = monsterHp.innerText;
-  let currentHp = hpText.innerText;
 
   if (monsterHp.innerText > 1) {
     // testing stats
-    currentMonsterHp -= Math.floor(Math.random() * xp) + 1;
+    let humanAttack = Math.floor(Math.random() * xp) + 1;
+    currentMonsterHp -= humanAttack;
 
-    // check for damage
-    console.log(`damaged dealt: ${Math.floor(Math.random() * xp) + 1}`);
+    // check for human damage
+    console.log(`human damaged dealt: ${humanAttack}`);
 
     monsterHp.innerText = currentMonsterHp;
-    currentHp -= monsters[0].level;
-    hp.innerText = currentHp;
-    text.innerText = "You have attacked the monster";
+
+    let monsterAttack = monsters[monsterIndex].level;
+    hp -= monsterAttack; // how does the monster dmg me?. but why damage initally is 1, then later become -2?
+
+    hpText.innerText = hp;
+    text.innerText = `You have attacked the monster, and dealt ${humanAttack} damage.\n
+    The ${monsterName.innerText} hits you for ${monsterAttack} damage`;
+
+    // check monster level
+    console.log(`monster level: ${monsters[monsterIndex].level}`);
 
     // check monster hp
     console.log(`monsterHp = ${currentMonsterHp}`);
