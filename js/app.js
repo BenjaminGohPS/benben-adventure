@@ -3,6 +3,7 @@ let hp = 100;
 let gold = 50;
 let xp = 0;
 let currentWeaponIndex = 0;
+let weaponInventory = [];
 let monsterIndex = 0;
 
 /*-------------- Constants -------------*/
@@ -122,7 +123,7 @@ const weapons = [
 ];
 
 /*----- Cached Element References  -----*/
-console.log("currentWeaponIndex:" + weapons[0]); // why this cannot work
+console.log("currentWeapon name:" + weapons[0].name); // why this cannot work
 console.log(weapons[0]); // this can show?
 
 /*-------------- Functions -------------*/
@@ -144,6 +145,18 @@ const init = () => {
   button2.onclick = goForest;
   button3.onclick = goDragon;
   button4.style.display = "none";
+
+  hp = 100;
+  gold = 50;
+  xp = 0;
+  currentWeaponIndex = 0;
+  weaponInventory = weapons[currentWeaponIndex];
+  console.log(weaponInventory); // check
+  monsterIndex = 0;
+
+  hpText.innerText = hp;
+  goldText.innerText = gold;
+  xpText.innerText = xp;
 };
 
 // is this needed?
@@ -232,6 +245,9 @@ const goDragon = () => {
 
 const goReplay = () => {
   //this function is to replay. same functions for winning or losing
+  text.innerText =
+    "You found yourself once more in familiar ground. How would you do things differently this time?";
+  init();
 };
 
 const fightIni = () => {
@@ -418,7 +434,7 @@ const checkLocation = () => {
     button1.innerText = locations[8].buttonText[0];
     button2.innerText = locations[8].buttonText[0];
     button3.innerText = locations[8].buttonText[0];
-    text.innerText = `You have defeated the ${monsters[monsterIndex].name}`;
+    text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. Replay?`;
     button1.onclick = goReplay;
     button2.onclick = goReplay;
     button3.onclick = goReplay;
