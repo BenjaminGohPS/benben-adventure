@@ -118,7 +118,7 @@ const locations = [
 ];
 
 const weapons = [
-  { name: "trusty knuckles", power: 100 },
+  { name: "trusty knuckles", power: 1 },
   { name: "The Stick", power: 5 },
 ];
 
@@ -351,13 +351,28 @@ const goAttack = () => {
 
     // check for human damage
     console.log(`human damaged dealt: ${humanAttack}`);
-
+    console.log(hp);
     monsterHp.innerText = currentMonsterHp;
     return isMonsterDefeated();
   } else {
     monsterDetails.style.display = "none";
 
     defeatMonster();
+  }
+};
+
+const isPlayerDefeated = () => {
+  if (hpText.innerText <= 0) {
+    monsterDetails.style.display = "none";
+    button1.innerText = locations[8].buttonText[0];
+    button2.innerText = locations[8].buttonText[0];
+    button3.innerText = locations[8].buttonText[0];
+    text.innerText = `You have been defeated. Want to try again?`;
+    button1.onclick = goReplay;
+    button2.onclick = goReplay;
+    button3.onclick = goReplay;
+    console.log("isPlayerDefeated is running");
+  } else {
   }
 };
 
@@ -371,11 +386,10 @@ const isMonsterDefeated = () => {
       Math.floor(Math.random() * monsters[monsterIndex].level) +
       monsters[monsterIndex].level;
     hp -= monsterAttack; // how does the monster dmg me?
-
+    hpText.innerText = hp;
     // check for monster damage
     console.log(`monster damaged dealt: ${monsterAttack}`);
 
-    hpText.innerText = hp;
     text.innerText = `You have attacked the monster with your ${
       weapons[currentWeaponIndex].name
     }, and dealt ${
@@ -388,10 +402,8 @@ const isMonsterDefeated = () => {
 
     // check monster hp
     console.log(`monsterHp = ${monsterHp.innerText}`);
-    // } else if (currentMonsterHp === 0) {
-    //   monsterDetails.style.display = "none";
 
-    //   defeatMonster();
+    isPlayerDefeated();
   }
 };
 
