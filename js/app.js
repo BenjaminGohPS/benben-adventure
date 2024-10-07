@@ -115,6 +115,12 @@ const locations = [
     buttonText: ["Town", "Fight Dragon", "NOT USED"],
     text: "You have enter the Dragon Den. The beast stares at you with it's petrifying eyes.\nThere is no need to risk your life for this.",
   },
+  {
+    //locations[9]
+    name: "REPLAY",
+    buttonText: ["Replay", "Replay", "Replay"],
+    text: "You found yourself once more in familiar ground. How would you do things differently this time?",
+  },
 ];
 
 const weapons = [
@@ -146,7 +152,7 @@ const init = () => {
   button3.onclick = goDragon;
   button4.style.display = "none";
 
-  hp = 100;
+  hp = 1;
   gold = 50;
   xp = 0;
   currentWeaponIndex = 0;
@@ -245,9 +251,9 @@ const goDragon = () => {
 
 const goReplay = () => {
   //this function is to replay. same functions for winning or losing
-  text.innerText =
-    "You found yourself once more in familiar ground. How would you do things differently this time?";
+
   init();
+  text.innerText = locations[9].text;
 };
 
 const fightIni = () => {
@@ -364,9 +370,9 @@ const goAttack = () => {
 const isPlayerDefeated = () => {
   if (hpText.innerText <= 0) {
     monsterDetails.style.display = "none";
-    button1.innerText = locations[8].buttonText[0];
-    button2.innerText = locations[8].buttonText[0];
-    button3.innerText = locations[8].buttonText[0];
+    button1.innerText = locations[9].buttonText[0];
+    button2.innerText = locations[9].buttonText[0];
+    button3.innerText = locations[9].buttonText[0];
     text.innerText = `You have been defeated. Want to try again?`;
     button1.onclick = goReplay;
     button2.onclick = goReplay;
