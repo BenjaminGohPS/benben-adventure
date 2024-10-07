@@ -26,4 +26,6 @@ body {
 #text {
   /* border: 1px solid bisque; */
   padding: 10px;
+  display: flex;
+  gap: 7px;
 }
