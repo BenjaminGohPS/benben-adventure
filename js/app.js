@@ -2,7 +2,7 @@
 let hp = 100;
 let gold = 50;
 let xp = 0;
-let currentWeaponIndex = [0];
+let currentWeaponIndex = 0;
 let monsterIndex = 0;
 
 /*-------------- Constants -------------*/
@@ -83,7 +83,7 @@ const locations = [
 ];
 
 const weapons = [
-  { name: "trusty knuckles", power: 1 },
+  { name: "trusty knuckles", power: 6 },
   { name: "The Stick", power: 5 },
 ];
 
@@ -237,41 +237,51 @@ const goAttack = () => {
 
   let currentMonsterHp = monsterHp.innerText;
 
-  if (monsterHp.innerText > 1) {
+  if (currentMonsterHp > 1) {
     // testing stats
-    let humanAttack = Math.floor(Math.random() * xp) + 1;
+    let humanAttack =
+      Math.floor(Math.random() * xp) + weapons[currentWeaponIndex].power;
     currentMonsterHp -= humanAttack;
 
     // check for human damage
     console.log(`human damaged dealt: ${humanAttack}`);
 
     monsterHp.innerText = currentMonsterHp;
+    return isMonsterDefeated();
+  } else {
+    monsterDetails.style.display = "none";
 
+    defeatMonster();
+  }
+};
+
+const isMonsterDefeated = () => {
+  if (monsterHp.innerText <= 0) {
+    monsterDetails.style.display = "none";
+
+    defeatMonster();
+  } else {
     let monsterAttack = monsters[monsterIndex].level;
-    hp -= monsterAttack; // how does the monster dmg me?. but why damage initally is 1, then later become -2?
+    hp -= monsterAttack; // how does the monster dmg me?
 
     hpText.innerText = hp;
-    text.innerText = `You have attacked the monster, and dealt ${humanAttack} damage.\n
+    text.innerText = `You have attacked the monster with your ${
+      weapons[currentWeaponIndex].name
+    }, and dealt ${
+      Math.floor(Math.random() * xp) + weapons[currentWeaponIndex].power
+    } damage.\n
     The ${monsterName.innerText} hits you for ${monsterAttack} damage`;
 
     // check monster level
     console.log(`monster level: ${monsters[monsterIndex].level}`);
 
     // check monster hp
-    console.log(`monsterHp = ${currentMonsterHp}`);
-  } else {
-    monsterDetails.style.display = "none";
+    console.log(`monsterHp = ${monsterHp.innerText}`);
+    // } else if (currentMonsterHp === 0) {
+    //   monsterDetails.style.display = "none";
 
-    defeatMonster();
+    //   defeatMonster();
   }
-  //   if (monsterHp.innerText > 0) {
-  //     monsterHp -= 1;
-  //     monsterHp.innerText = monsterHp;
-  //     text.innerText = "You have attacked the monster";
-  //   } else {
-  //     monsterDetails.style.display = "none";
-  //     text.innerText = "You have defeated the monster";
-  //   }
 };
 
 const defeatMonster = () => {
