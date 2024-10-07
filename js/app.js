@@ -18,6 +18,7 @@ const monsterHp = document.getElementById("monsterHp");
 const button1 = document.getElementById("button1");
 const button2 = document.getElementById("button2");
 const button3 = document.getElementById("button3");
+const button4 = document.getElementById("button4");
 
 const text = document.getElementById("text");
 
@@ -110,7 +111,7 @@ const locations = [
 ];
 
 const weapons = [
-  { name: "trusty knuckles", power: 1 },
+  { name: "trusty knuckles", power: 100 },
   { name: "The Stick", power: 5 },
 ];
 
@@ -136,6 +137,7 @@ const init = () => {
   button1.onclick = goShop;
   button2.onclick = goForest;
   button3.onclick = goDragon;
+  button4.style.display = "none";
 };
 
 // is this needed?
@@ -152,6 +154,7 @@ const goShop = () => {
   button1.onclick = goTown;
   button2.onclick = buyHp;
   button3.onclick = buyWeapon;
+  button4.style.display = "none";
 };
 
 const goTown = () => {
@@ -176,6 +179,7 @@ const goForest = () => {
   button1.onclick = goTown;
   button2.onclick = goInnerForest;
   button3.onclick = fightSlime;
+  button4.style.display = "none";
 };
 
 const goInnerForest = () => {
@@ -189,6 +193,7 @@ const goInnerForest = () => {
   button1.onclick = goTown;
   button2.onclick = goCave;
   button3.onclick = fightWolf;
+  button4.style.display = "none";
 };
 
 const goCave = () => {
@@ -202,6 +207,7 @@ const goCave = () => {
   button1.onclick = goTown;
   button2.onclick = goInnerForest;
   button3.onclick = fightGoblin;
+  button4.style.display = "none";
 };
 
 const goDragon = () => {
@@ -423,6 +429,15 @@ const checkLocation = () => {
     button1.onclick = goTown;
     button2.onclick = goCave;
     button3.onclick = fightGoblin;
+  } else if (monsterIndex === 3) {
+    button1.innerText = locations[7].buttonText[0];
+    button2.innerText = locations[7].buttonText[0];
+    button3.innerText = locations[7].buttonText[0];
+    text.innerText = `You have defeated the ${monsters[monsterIndex].name}`;
+    button1.onclick = goTown;
+    button2.onclick = goTown;
+    button3.onclick = goTown;
+    button4.style.display = "block";
   }
 };
 
