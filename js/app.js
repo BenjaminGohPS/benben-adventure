@@ -135,7 +135,7 @@ const locations = [
 const weaponInventory = [];
 
 const weapons = [
-  { name: "Trusty Knuckles", power: 1000 },
+  { name: "Trusty Knuckles", power: 1 },
   { name: "The Stick", power: 3, cost: 50 },
   { name: "Pocket Knife", power: 7, cost: 100 },
   { name: "Le Daggar", power: 15, cost: 200 },
@@ -169,7 +169,7 @@ const init = () => {
   button3.onclick = goDragon;
   render();
 
-  hp = 1000;
+  hp = 100;
   gold = 50;
   xp = 0;
   currentWeaponIndex = 0;
@@ -205,7 +205,7 @@ const isDragonDefeated = () => {
   button1.onclick = goShop;
   button2.onclick = goForest;
   button3.onclick = goDragon;
-  button4.onclick = goGoose; 
+  button4.onclick = goGoose;
   warning.style.display = "none";
   areaImage.src = locations[0].image; // let's change the image!
   areaImage.alt = locations[0].alt;
@@ -535,25 +535,41 @@ const checkLocations = () => {
     button2.onclick = goTown;
     button3.onclick = goTown;
     dragonDefeat = 1;
-    console.log(dragonDefeat);
-    // incomplete function
-    // button4.style.display = "block";
   } else {
     button1.innerText = locations[9].buttonText[0];
     button2.innerText = locations[9].buttonText[0];
     button3.innerText = locations[9].buttonText[0];
-    text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. This time, it really is done. Enjoy your roasted golden goose, Hong Kong Style!`;
+    text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. This time, it really is done. Enjoy your roasted Golden Goose, Hong Kong Style!`;
     button1.onclick = goReplay;
     button2.onclick = goReplay;
     button3.onclick = goReplay;
     dragonDefeat = 1;
-    // incomplete function
-    // button4.style.display = "block";
   }
 };
 
 const goBlock = () => {
   //block codes
+  let monsterAttack =
+    Math.floor(Math.random() * monsters[monsterIndex].level) +
+    monsters[monsterIndex].level;
+
+  let blockAmount = weapons[currentWeaponIndex].power;
+  hp -= monsterAttack - blockAmount; // how does the monster dmg me?
+  hp += blockAmount;
+  hpText.innerText = hp;
+  // check for monster damage
+  console.log(`monster damaged dealt: ${monsterAttack}`);
+  console.log(`block amount: ${blockAmount}`);
+
+  text.innerText = `You have blocked the incoming attack from the monster with your ${weapons[currentWeaponIndex].name}. You repositon yourself, and gain ${blockAmount} of HP.`;
+
+  // check monster level
+  console.log(`monster level: ${monsters[monsterIndex].level}`);
+
+  // check monster hp
+  console.log(`monsterHp = ${monsterHp.innerText}`);
+
+  isPlayerDefeated();
 };
 
 const buyHp = () => {
