@@ -93,17 +93,15 @@ const locations = [
     name: "Fight",
     buttonText: ["Attack", "Block", "Run"],
     text: "You have engage the monster.",
-
-    // ; The ${monsters[monsterIndex].name}., // think of how to amend the text based on which monster I am attacking. The monsterIndex still not working for wolf. @@
   },
   {
     //locations[4]
     name: "Win",
     buttonText: ["Attack", "Block", "Run"],
-    text: `You have engage the monster; The ${monsters[monsterIndex].name}.`, // think of how to amend the text based on which monster I am attacking
+    text: `You have engage the monster; The ${monsters[monsterIndex].name}.`,
   },
   {
-    //locations[5] - not in use
+    //locations[5]
     name: "Golden Goose",
     buttonText: ["Attack", "Catch", "Dance"],
     text: `A new location appeared next to town. I mean, it's just there...Why not check it out right?\nA Golden Goose looks at you with disdain. You have no idea what to make of it. All you can think of, is having the goose Hong Kong roasted style! `,
@@ -207,7 +205,7 @@ const isDragonDefeated = () => {
   button1.onclick = goShop;
   button2.onclick = goForest;
   button3.onclick = goDragon;
-  button4.onclick = goGoose; // when this cannot run, the game is correct
+  button4.onclick = goGoose; 
   warning.style.display = "none";
   areaImage.src = locations[0].image; // let's change the image!
   areaImage.alt = locations[0].alt;
@@ -236,7 +234,7 @@ const goTown = () => {
   //function on button when clicked to go town
 
   console.log(dragonDefeat);
-  if (!dragonDefeat === 1) {
+  if (dragonDefeat === 0) {
     monsterDetails.style.display = "none";
     button3.style.display = "block";
     button1.innerText = locations[0].buttonText[0];
