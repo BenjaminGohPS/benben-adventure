@@ -4,6 +4,7 @@ let gold = 50;
 let xp = 0;
 let currentWeaponIndex = 0;
 let monsterIndex = 0;
+let dragonDefeat = 0;
 
 /*-------------- Constants -------------*/
 const areaImage = document.getElementById("areaImage");
@@ -64,8 +65,10 @@ const locations = [
   {
     //locations[0]
     name: "Town",
-    buttonText: ["Shop", "Forest", "Dragon Den"],
+    buttonText: ["Shop", "Forest", "Dragon Den", "???"],
     text: "You are now standing at the town square. To your left is the store. Up ahead is the forest. To the right of the town, lies the fearsome Dragon you have heard from the whispers going around town.",
+    text2:
+      "Now that you have defeated the dragon, you can't help but wonder is there really only ONE dragon? Wait a minute....what's that??",
     image:
       "https://image.lexica.art/full_webp/a0ad1045-2e7c-44e9-afca-2cf952ae9448",
     alt: "girl standing in the entrance of a forest",
@@ -101,9 +104,9 @@ const locations = [
   },
   {
     //locations[5] - not in use
-    name: "Lose",
-    buttonText: ["Attack", "Block", "Run"],
-    text: `You have engage the monster; The ${monsters[monsterIndex].name}.`,
+    name: "Golden Goose",
+    buttonText: ["Attack", "Catch", "Dance"],
+    text: `A new location appeared next to town. I mean, it's just there...Why not check it out right?\nA Golden Goose looks at you with disdain. You have no idea what to make of it. All you can think of, is having the goose Hong Kong roasted style! `,
   },
   {
     //locations[6]
@@ -134,7 +137,7 @@ const locations = [
 const weaponInventory = [];
 
 const weapons = [
-  { name: "Trusty Knuckles", power: 1 },
+  { name: "Trusty Knuckles", power: 1000 },
   { name: "The Stick", power: 3, cost: 50 },
   { name: "Pocket Knife", power: 7, cost: 100 },
   { name: "Le Daggar", power: 15, cost: 200 },
@@ -167,16 +170,15 @@ const init = () => {
   button2.onclick = goForest;
   button3.onclick = goDragon;
   render();
-  // button4.style.display = "none";
-  // warning.style.display = "none";
 
-  hp = 100;
-  gold = 30;
+  hp = 1000;
+  gold = 50;
   xp = 0;
   currentWeaponIndex = 0;
   weaponInventory.push(weapons[currentWeaponIndex]);
   console.log(weaponInventory); // check
   monsterIndex = 0;
+  dragonDefeat = 0;
 
   hpText.innerText = hp;
   goldText.innerText = gold;
@@ -190,6 +192,25 @@ const render = () => {
   //code to render
   warning.style.display = "none";
   button4.style.display = "none";
+};
+
+const isDragonDefeated = () => {
+  monsterDetails.style.display = "none";
+  button3.style.display = "block";
+  button4.style.display = "block";
+  console.log("dragonDefeat should be working");
+  button1.innerText = locations[0].buttonText[0];
+  button2.innerText = locations[0].buttonText[1];
+  button3.innerText = locations[0].buttonText[2];
+  button4.innerText = locations[0].buttonText[3];
+  text.innerText = locations[0].text2;
+  button1.onclick = goShop;
+  button2.onclick = goForest;
+  button3.onclick = goDragon;
+  button4.onclick = goGoose; // when this cannot run, the game is correct
+  warning.style.display = "none";
+  areaImage.src = locations[0].image; // let's change the image!
+  areaImage.alt = locations[0].alt;
 };
 
 const goShop = () => {
@@ -213,18 +234,24 @@ const goShop = () => {
 
 const goTown = () => {
   //function on button when clicked to go town
-  monsterDetails.style.display = "none";
-  button3.style.display = "block";
-  button1.innerText = locations[0].buttonText[0];
-  button2.innerText = locations[0].buttonText[1];
-  button3.innerText = locations[0].buttonText[2];
-  text.innerText = locations[0].text;
-  button1.onclick = goShop;
-  button2.onclick = goForest;
-  button3.onclick = goDragon;
-  areaImage.src = locations[0].image;
-  areaImage.alt = locations[0].alt;
-  render();
+
+  console.log(dragonDefeat);
+  if (!dragonDefeat === 1) {
+    monsterDetails.style.display = "none";
+    button3.style.display = "block";
+    button1.innerText = locations[0].buttonText[0];
+    button2.innerText = locations[0].buttonText[1];
+    button3.innerText = locations[0].buttonText[2];
+    text.innerText = locations[0].text;
+    button1.onclick = goShop;
+    button2.onclick = goForest;
+    button3.onclick = goDragon;
+    areaImage.src = locations[0].image;
+    areaImage.alt = locations[0].alt;
+    render();
+  } else {
+    isDragonDefeated();
+  }
 };
 
 const goForest = () => {
@@ -236,6 +263,7 @@ const goForest = () => {
   button1.onclick = goTown;
   button2.onclick = goInnerForest;
   button3.onclick = fightSlime;
+  button4.style.display = "none";
 };
 
 const goInnerForest = () => {
@@ -268,6 +296,7 @@ const goDragon = () => {
   //function on button when clicked to go Dragon Den
   monsterIndex = 3;
   button3.style.display = "none";
+  button4.style.display = "none";
   console.log(monsters[monsterIndex].name);
   button1.innerText = locations[8].buttonText[0];
   button2.innerText = locations[8].buttonText[1];
@@ -276,6 +305,18 @@ const goDragon = () => {
   button1.onclick = goTown;
   button2.onclick = fightDragon;
   button3.onclick = "";
+};
+
+const goGoose = () => {
+  //function on button when clicked to go ???
+  button1.innerText = locations[5].buttonText[0];
+  button2.innerText = locations[5].buttonText[1];
+  button3.innerText = locations[5].buttonText[2];
+  text.innerText = locations[5].text;
+  button1.onclick = fightGoose;
+  button2.onclick = fightGoose;
+  button3.onclick = fightGoose;
+  button4.style.display = "none";
 };
 
 const goReplay = () => {
@@ -362,6 +403,14 @@ const fightDragon = () => {
     hp: 200,
   },
   */
+};
+
+const fightGoose = () => {
+  monsterIndex = 4;
+  fightIni();
+
+  text.innerText +=
+    "You can't stop drooling as you stare at the plump Golden Goose";
 };
 
 const goAttack = () => {
@@ -480,13 +529,26 @@ const checkLocations = () => {
     button2.onclick = goInnerForest;
     button3.onclick = fightGoblin;
   } else if (monsterIndex === 3) {
+    button1.innerText = locations[1].buttonText[0];
+    button2.innerText = locations[1].buttonText[0];
+    button3.innerText = locations[1].buttonText[0];
+    text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. But is that really it?`;
+    button1.onclick = goTown;
+    button2.onclick = goTown;
+    button3.onclick = goTown;
+    dragonDefeat = 1;
+    console.log(dragonDefeat);
+    // incomplete function
+    // button4.style.display = "block";
+  } else {
     button1.innerText = locations[9].buttonText[0];
     button2.innerText = locations[9].buttonText[0];
     button3.innerText = locations[9].buttonText[0];
-    text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. Replay?`;
+    text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. This time, it really is done. Enjoy your roasted golden goose, Hong Kong Style!`;
     button1.onclick = goReplay;
     button2.onclick = goReplay;
     button3.onclick = goReplay;
+    dragonDefeat = 1;
     // incomplete function
     // button4.style.display = "block";
   }
@@ -571,7 +633,6 @@ const compareChoices = () => {
   if (playerChoice === computerChoice) {
     goldPool += 20;
     message = `You both tied. Gold pool is now ${goldPool}. Winner takes all!`;
-
   } else if (playerChoice === "scissors" && computerChoice === "paper") {
     message = "You won.";
     score++;
@@ -620,9 +681,9 @@ const playGame = (event) => {
   }
 };
 
+init();
 /*----------- Event Listeners ----------*/
 document.querySelector("#buttons").addEventListener("click", playGame);
-init();
 
 /*----------- PERSONAL NOTES ----------*/
 /*
