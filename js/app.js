@@ -3,7 +3,6 @@ let hp = 100;
 let gold = 50;
 let xp = 0;
 let currentWeaponIndex = 0;
-
 let monsterIndex = 0;
 
 /*-------------- Constants -------------*/
@@ -24,6 +23,8 @@ const button3 = document.getElementById("button3");
 const button4 = document.getElementById("button4");
 
 const text = document.getElementById("text");
+
+const warning = document.getElementById("warning");
 
 const popoverTriggerList = document.querySelectorAll(
   '[data-bs-toggle="popover"]'
@@ -64,7 +65,6 @@ const locations = [
     //locations[0]
     name: "Town",
     buttonText: ["Shop", "Forest", "Dragon Den"],
-    // buttonFunction: [goShop, goForest, fightDragon],
     text: "You are now standing at the town square. To your left is the store. Up ahead is the forest. To the right of the town, lies the fearsome Dragon you have heard from the whispers going around town.",
     image:
       "https://image.lexica.art/full_webp/a0ad1045-2e7c-44e9-afca-2cf952ae9448",
@@ -73,8 +73,7 @@ const locations = [
   {
     //locations[1]
     name: "Shop",
-    buttonText: ["Town", "Buy HP: 10 gold", "Buy Weapon"],
-    // buttonFunction: [goTown, buyHp, buyWeapon],
+    buttonText: ["Town", "Buy HP: 10 gold", "Buy Weapon", "WARNING: 10 gold"],
     text: "Ah, an adventurer! Come now, what can I do for you?",
     image:
       "https://image.lexica.art/full_webp/2cce2637-98ef-4e49-9682-aa352dbad992",
@@ -101,7 +100,7 @@ const locations = [
     text: `You have engage the monster; The ${monsters[monsterIndex].name}.`, // think of how to amend the text based on which monster I am attacking
   },
   {
-    //locations[5] - Haven't amend it yet
+    //locations[5] - not in use
     name: "Lose",
     buttonText: ["Attack", "Block", "Run"],
     text: `You have engage the monster; The ${monsters[monsterIndex].name}.`,
@@ -167,10 +166,12 @@ const init = () => {
   button1.onclick = goShop;
   button2.onclick = goForest;
   button3.onclick = goDragon;
-  button4.style.display = "none";
+  render();
+  // button4.style.display = "none";
+  // warning.style.display = "none";
 
   hp = 100;
-  gold = 500;
+  gold = 30;
   xp = 0;
   currentWeaponIndex = 0;
   weaponInventory.push(weapons[currentWeaponIndex]);
@@ -187,6 +188,8 @@ const init = () => {
 // is this needed?
 const render = () => {
   //code to render
+  warning.style.display = "none";
+  button4.style.display = "none";
 };
 
 const goShop = () => {
@@ -196,10 +199,14 @@ const goShop = () => {
   button3.innerText =
     locations[1].buttonText[2] +
     `: ${weapons[currentWeaponIndex + 1].cost} gold`;
+  button4.style.display = "block";
+  button4.innerText = locations[1].buttonText[3];
+
   text.innerText = locations[1].text;
   button1.onclick = goTown;
   button2.onclick = buyHp;
   button3.onclick = buyWeapon;
+  button4.onclick = goWarning;
   areaImage.src = locations[1].image;
   areaImage.alt = locations[1].alt;
 };
@@ -217,6 +224,7 @@ const goTown = () => {
   button3.onclick = goDragon;
   areaImage.src = locations[0].image;
   areaImage.alt = locations[0].alt;
+  render();
 };
 
 const goForest = () => {
@@ -490,6 +498,7 @@ const goBlock = () => {
 
 const buyHp = () => {
   //buy health
+  warning.style.display = "none";
   if (gold >= 10) {
     gold -= 10;
     hp += 10;
@@ -502,19 +511,13 @@ const buyHp = () => {
   }
 };
 
-const canYouAfford = () => {
-  if (gold >= weapons[currentWeaponIndex + 1].cost) {
-    //run code
-  }
-};
-
 const buyWeapon = () => {
   //buy weapon
   /* 
   start simple. when button is clicked, buys weapon.
   weapon goes to array.
   */
-
+  warning.style.display = "none";
   if (gold >= weapons[currentWeaponIndex + 1].cost) {
     gold -= weapons[currentWeaponIndex + 1].cost;
     goldText.innerText = gold;
@@ -535,16 +538,96 @@ const buyWeapon = () => {
       return (text.innerText = `You have purchased, and equipped a new weapon.\n"That's the last of it. No more weapons for you.", says the Shopkeeper.`);
     }
   } else {
-    text.innerText = `"No touching! You break it, I break you!"`;
+    text.innerText = `"No touching! You break it, I break you!!"`;
   }
 };
 
-init();
+const goWarning = () => {
+  // mini game for a chance to earn coins
+  warning.style.display = "block";
+  text.innerText = `"Fancy a game? Win, and I will give you 10 gold. Lose, and you owe me 10 gold! Tied? We play again, and winner takes all!"`;
+};
+
+let score = 0;
+let computerChoice = "";
+let playerChoice = "";
+let goldPool = 0;
+
+const choices = ["scissors", "paper", "stone"];
+const scoreElement = document.querySelector("#score");
+
+const printResult = (message) => {
+  const results =
+    `You chose ${playerChoice} and the computer chose ${computerChoice}. ` +
+    message;
+
+  text.innerText = results;
+  scoreElement.innerText = "score " + score;
+};
+
+const compareChoices = () => {
+  let message = "";
+
+  if (playerChoice === computerChoice) {
+    goldPool += 20;
+    message = `You both tied. Gold pool is now ${goldPool}. Winner takes all!`;
+
+  } else if (playerChoice === "scissors" && computerChoice === "paper") {
+    message = "You won.";
+    score++;
+    gold += 20 + goldPool;
+    goldText.innerText = gold;
+    goldPool = 0;
+  } else if (playerChoice === "paper" && computerChoice === "stone") {
+    message = "You won.";
+    score++;
+    gold += 20 + goldPool;
+    goldText.innerText = gold;
+    goldPool = 0;
+  } else if (playerChoice === "stone" && computerChoice === "scissors") {
+    message = "You won.";
+    score++;
+    gold += 20 + goldPool;
+    goldText.innerText = gold;
+    goldPool = 0;
+  } else {
+    message = "You lost.";
+    goldText.innerText = gold;
+    goldPool = 0;
+  }
+
+  printResult(message);
+};
+
+const getComputerSelection = () => {
+  const idx = Math.floor(Math.random() * choices.length);
+  computerChoice = choices[idx];
+};
+
+const getButtonClick = (event) => {
+  playerChoice = event.target.id;
+};
+
+const playGame = (event) => {
+  getButtonClick(event);
+  if (gold >= 10) {
+    gold -= 10;
+    goldText.innerText = gold;
+    getComputerSelection();
+    compareChoices();
+  } else {
+    text.innerText = '"Bah! Come back when you have more coins for me!"';
+  }
+};
 
 /*----------- Event Listeners ----------*/
-//button1.addEventListener('click', goStore);
+document.querySelector("#buttons").addEventListener("click", playGame);
+init();
 
 /*----------- PERSONAL NOTES ----------*/
 /*
 monster gold, monster attack -> will be randomise by math formula
+
+warning.style.display = "none";
+button4.style.display = "none";
 */
