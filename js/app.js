@@ -73,7 +73,7 @@ const locations = [
   {
     //locations[1]
     name: "Shop",
-    buttonText: ["Town", "Buy HP", "Buy Weapon"],
+    buttonText: ["Town", "Buy HP: 10 gold", "Buy Weapon"],
     // buttonFunction: [goTown, buyHp, buyWeapon],
     text: "Ah, an adventurer! Come now, what can I do for you?",
     image:
@@ -136,7 +136,11 @@ const weaponInventory = [];
 
 const weapons = [
   { name: "Trusty Knuckles", power: 1 },
-  { name: "The Stick", power: 50 },
+  { name: "The Stick", power: 3, cost: 50 },
+  { name: "Pocket Knife", power: 7, cost: 100 },
+  { name: "Le Daggar", power: 15, cost: 200 },
+  { name: "Big-Ass-Sword", power: 31, cost: 400 },
+  { name: "Accupuncture Set", power: 66, cost: 1000 },
 ];
 
 /*----- Cached Element References  -----*/
@@ -148,6 +152,8 @@ console.log(JSON.stringify(weapons[0])); // this can show?
 console.log(locations[0].buttonText[0]);
 console.log(locations[1].buttonText[0]);
 console.log(monsterHp);
+console.log(currentWeaponIndex);
+console.log(weapons[currentWeaponIndex + 5].name);
 
 const init = () => {
   //code to init the game
@@ -164,7 +170,7 @@ const init = () => {
   button4.style.display = "none";
 
   hp = 100;
-  gold = 50;
+  gold = 500;
   xp = 0;
   currentWeaponIndex = 0;
   weaponInventory.push(weapons[currentWeaponIndex]);
@@ -187,7 +193,9 @@ const goShop = () => {
   //function on button when clicked to go shop
   button1.innerText = locations[1].buttonText[0];
   button2.innerText = locations[1].buttonText[1];
-  button3.innerText = locations[1].buttonText[2];
+  button3.innerText =
+    locations[1].buttonText[2] +
+    `: ${weapons[currentWeaponIndex + 1].cost} gold`;
   text.innerText = locations[1].text;
   button1.onclick = goTown;
   button2.onclick = buyHp;
@@ -494,12 +502,41 @@ const buyHp = () => {
   }
 };
 
+const canYouAfford = () => {
+  if (gold >= weapons[currentWeaponIndex + 1].cost) {
+    //run code
+  }
+};
+
 const buyWeapon = () => {
   //buy weapon
   /* 
   start simple. when button is clicked, buys weapon.
   weapon goes to array.
   */
+
+  if (gold >= weapons[currentWeaponIndex + 1].cost) {
+    gold -= weapons[currentWeaponIndex + 1].cost;
+    goldText.innerText = gold;
+    currentWeaponIndex++;
+
+    if (currentWeaponIndex < 5) {
+      console.log(currentWeaponIndex);
+      button3.innerText =
+        locations[1].buttonText[2] +
+        `: ${weapons[currentWeaponIndex + 1].cost} gold`;
+      weaponNameText.innerText = weapons[currentWeaponIndex].name;
+      weaponPowerText.innerText = weapons[currentWeaponIndex].power;
+      text.innerText = `You have purchased, and equipped a new weapon.\n"No refunds accepted for goods sold!", says the Shopkeeper.`;
+    } else {
+      button3.style.display = "none";
+      weaponNameText.innerText = weapons[currentWeaponIndex].name;
+      weaponPowerText.innerText = weapons[currentWeaponIndex].power;
+      return (text.innerText = `You have purchased, and equipped a new weapon.\n"That's the last of it. No more weapons for you.", says the Shopkeeper.`);
+    }
+  } else {
+    text.innerText = `"No touching! You break it, I break you!"`;
+  }
 };
 
 init();
