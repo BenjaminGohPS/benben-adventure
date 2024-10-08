@@ -3,7 +3,7 @@ let hp = 100;
 let gold = 50;
 let xp = 0;
 let currentWeaponIndex = 0;
-let weaponInventory = [];
+
 let monsterIndex = 0;
 
 /*-------------- Constants -------------*/
@@ -11,6 +11,8 @@ const areaImage = document.getElementById("areaImage");
 const hpText = document.getElementById("hpText");
 const goldText = document.getElementById("goldText");
 const xpText = document.getElementById("xpText");
+const weaponNameText = document.getElementById("weaponNameText");
+const weaponPowerText = document.getElementById("weaponPowerText");
 
 const monsterDetails = document.getElementById("monsterDetails");
 const monsterName = document.getElementById("monsterName");
@@ -72,7 +74,7 @@ const locations = [
     //locations[1]
     name: "Shop",
     buttonText: ["Town", "Buy HP", "Buy Weapon"],
-    // buttonFunction: [goTown, buyHp, buyWeapon, ],
+    // buttonFunction: [goTown, buyHp, buyWeapon],
     text: "Ah, an adventurer! Come now, what can I do for you?",
     image:
       "https://image.lexica.art/full_webp/2cce2637-98ef-4e49-9682-aa352dbad992",
@@ -130,13 +132,15 @@ const locations = [
   },
 ];
 
+const weaponInventory = [];
+
 const weapons = [
-  { name: "trusty knuckles", power: 100 },
-  { name: "The Stick", power: 5 },
+  { name: "Trusty Knuckles", power: 1 },
+  { name: "The Stick", power: 50 },
 ];
 
 /*----- Cached Element References  -----*/
-console.log("currentWeapon name:" + weapons[0]); // why this cannot work
+console.log("currentWeapon name:" + weapons[0].name); // why this cannot work
 console.log(JSON.stringify(weapons[0])); // this can show?
 
 /*-------------- Functions -------------*/
@@ -163,13 +167,15 @@ const init = () => {
   gold = 50;
   xp = 0;
   currentWeaponIndex = 0;
-  weaponInventory = weapons[currentWeaponIndex];
+  weaponInventory.push(weapons[currentWeaponIndex]);
   console.log(weaponInventory); // check
   monsterIndex = 0;
 
   hpText.innerText = hp;
   goldText.innerText = gold;
   xpText.innerText = xp;
+  weaponNameText.innerText = weaponInventory[currentWeaponIndex].name;
+  weaponPowerText.innerText = weaponInventory[currentWeaponIndex].power;
 };
 
 // is this needed?
@@ -490,6 +496,10 @@ const buyHp = () => {
 
 const buyWeapon = () => {
   //buy weapon
+  /* 
+  start simple. when button is clicked, buys weapon.
+  weapon goes to array.
+  */
 };
 
 init();
