@@ -23,6 +23,13 @@ const button4 = document.getElementById("button4");
 
 const text = document.getElementById("text");
 
+const popoverTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="popover"]'
+);
+const popoverList = [...popoverTriggerList].map(
+  (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+);
+
 const monsters = [
   {
     name: "Slime",
@@ -129,8 +136,8 @@ const weapons = [
 ];
 
 /*----- Cached Element References  -----*/
-console.log("currentWeapon name:" + weapons[0].name); // why this cannot work
-console.log(weapons[0]); // this can show?
+console.log("currentWeapon name:" + weapons[0]); // why this cannot work
+console.log(JSON.stringify(weapons[0])); // this can show?
 
 /*-------------- Functions -------------*/
 //CHECKS
@@ -378,7 +385,6 @@ const isPlayerDefeated = () => {
     button2.onclick = goReplay;
     button3.onclick = goReplay;
     console.log("isPlayerDefeated is running");
-  } else {
   }
 };
 
@@ -423,10 +429,10 @@ const defeatMonster = () => {
   Gold obtained: ${Math.floor(monsters[monsterIndex].level * 3)}
   XP obtained: ${Math.floor(monsters[monsterIndex].level)}`;
 
-  checkLocation();
+  checkLocations();
 };
 
-const checkLocation = () => {
+const checkLocations = () => {
   if (monsterIndex === 0) {
     button1.innerText = locations[2].buttonText[0];
     button2.innerText = locations[2].buttonText[1];

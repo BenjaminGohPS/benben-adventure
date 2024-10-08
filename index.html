@@ -3,8 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 
     <script
       defer
@@ -12,6 +10,7 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" href="./css/style.css" />
     <script defer src="./js/app.js"></script>
 
     <!-- unblock below to check for final game-->
@@ -28,7 +27,16 @@
     <div id="game" class="text-bg-dark p-3">
       <!-- This top column will used for the hidden God Mode activation-->
       <div id="godMode" class="boxes">&nbsp</div>
-      <div><h1 class="Hello">Benben's Adventure!</h1></div>
+      <span
+        class="d-inline-block"
+        tabindex="0"
+        data-bs-toggle="popover"
+        data-bs-trigger="hover focus"
+        data-bs-placement="bottom"
+        data-bs-content="Yes. That's you. Benjamin. Your friends calls you 'Benben' affectionally. You have no idea why you are here. However an adventure await you~"
+      >
+        <div><h1 class="Hello">Benben's Adventure!</h1></div></span
+      >
 
       <div class="row">
         <div>
@@ -41,14 +49,38 @@
         </div>
       </div>
       <div id="stats" class="boxes">
-        <span class="stat"
-          >HP: <strong><span id="hpText">100</span></strong></span
+        <span
+          class="d-inline-block"
+          tabindex="0"
+          data-bs-toggle="popover"
+          data-bs-trigger="hover focus"
+          data-bs-content="This is your Health Point (HP). You die once it reaches zero!"
         >
-        <span class="stat"
-          >Gold: <strong><span id="goldText">50</span></strong></span
+          <span class="stat"
+            >HP: <strong> <span id="hpText">100</span></strong></span
+          ></span
         >
-        <span class="stat"
-          >XP: <strong><span id="xpText">0</span></strong></span
+        <span
+          class="d-inline-block"
+          tabindex="0"
+          data-bs-toggle="popover"
+          data-bs-trigger="hover focus"
+          data-bs-content="Your hard earned gold. Spent it at the shop!"
+        >
+          <span class="stat"
+            >Gold: <strong><span id="goldText">50</span></strong></span
+          ></span
+        >
+        <span
+          class="d-inline-block"
+          tabindex="0"
+          data-bs-toggle="popover"
+          data-bs-trigger="hover focus"
+          data-bs-content="The key to getting stronger. You gain eXperience Point (XP), when you defeat monsters!"
+        >
+          <span class="stat"
+            >XP: <strong><span id="xpText">0</span></strong></span
+          ></span
         >
       </div>
 
