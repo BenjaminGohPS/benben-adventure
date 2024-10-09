@@ -165,7 +165,7 @@ const locations = [
 const weaponInventory = [];
 
 const weapons = [
-  { name: "Trusty Knuckles", power: 100 },
+  { name: "Trusty Knuckles", power: 1 },
   {
     name: "The Stick",
     power: 3,
@@ -193,7 +193,7 @@ const weapons = [
   },
   {
     name: "Accupuncture Set",
-    power: 66,
+    power: 1000,
     cost: 1000,
     text: "You are not sure what to make out of the Accupuncture Set. It can either relieve the monster's years of aliments, or relieve them of their lives... ",
   },
@@ -225,8 +225,8 @@ const init = () => {
   button3.onclick = goDragon;
   render();
 
-  hp = 1000;
-  gold = 5000;
+  hp = 100;
+  gold = 50;
   xp = 0;
   currentWeaponIndex = 0;
   weaponInventory.push(weapons[currentWeaponIndex]);
@@ -412,7 +412,7 @@ const fightIni = () => {
   button2.onclick = goBlock;
   button3.onclick = goTown;
 
-  if (dragonDefeat === 1) {
+  if (dragonDefeat === 1 && monsterIndex < 3) {
     monsterHp.innerText = monsters[monsterIndex].hp * 10;
   }
 };
@@ -534,7 +534,7 @@ const isMonsterDefeated = () => {
       Math.floor(Math.random() * monsters[monsterIndex].level) +
       monsters[monsterIndex].level;
 
-    if (dragonDefeat === 1) {
+    if (dragonDefeat === 1 && monsterIndex < 3) {
       let monsterAttack2 =
         Math.floor(Math.random() * monsters[monsterIndex].level * 10) +
         monsters[monsterIndex].level;
@@ -580,17 +580,23 @@ const isMonsterDefeated = () => {
 };
 
 const defeatMonster = () => {
-  gold += Math.floor(monsters[monsterIndex].level * 3);
-  goldText.innerText = gold;
+  if (dragonDefeat === 1 && monsterIndex < 3) {
+    gold += Math.floor(monsters[monsterIndex].level * 3 * 10);
+    goldText.innerText = gold;
 
-  xp += Math.floor(monsters[monsterIndex].level);
-  xpText.innerText = xp;
+    xp += Math.floor(monsters[monsterIndex].level * 10);
+    xpText.innerText = xp;
+  } else {
+    gold += Math.floor(monsters[monsterIndex].level * 3);
+    goldText.innerText = gold;
+
+    xp += Math.floor(monsters[monsterIndex].level);
+    xpText.innerText = xp;
+  }
   text.innerText = `You have defeated the ${monsters[monsterIndex].name}.
   Gold obtained: ${Math.floor(monsters[monsterIndex].level * 3)}
   XP obtained: ${Math.floor(monsters[monsterIndex].level)}`;
 
-  // areaImage.src = locations[4].image;
-  // areaImage.alt = locations[4].alt;
   checkLocations();
 };
 
