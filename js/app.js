@@ -165,7 +165,7 @@ const locations = [
 const weaponInventory = [];
 
 const weapons = [
-  { name: "Trusty Knuckles", power: 1000 },
+  { name: "Trusty Knuckles", power: 1 },
   {
     name: "The Stick",
     power: 3,
@@ -225,7 +225,7 @@ const init = () => {
   button3.onclick = goDragon;
   render();
 
-  hp = 1000;
+  hp = 100;
   gold = 50;
   xp = 0;
   currentWeaponIndex = 0;
