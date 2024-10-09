@@ -113,7 +113,7 @@ const locations = [
     text: "You have engage the monster.",
   },
   {
-    //locations[4]
+    //locations[4] not used
     name: "Win",
     buttonText: ["Attack", "Block", "Run"],
     text: `You have engage the monster; The ${monsters[monsterIndex].name}.`,
@@ -200,16 +200,8 @@ const weapons = [
 ];
 
 /*----- Cached Element References  -----*/
-console.log("currentWeapon name:" + weapons[0].name); // why this cannot work
-console.log(JSON.stringify(weapons[0])); // this can show?
 
 /*-------------- Functions -------------*/
-//CHECKS
-console.log(locations[0].buttonText[0]);
-console.log(locations[1].buttonText[0]);
-console.log(monsterHp);
-console.log(currentWeaponIndex);
-console.log(weapons[currentWeaponIndex + 5].name);
 
 const init = () => {
   //code to init the game
@@ -491,14 +483,9 @@ const goAttack = () => {
   let currentMonsterHp = monsterHp.innerText;
 
   if (currentMonsterHp > 1) {
-    // testing stats
     let humanAttack =
       Math.floor(Math.random() * xp) + weapons[currentWeaponIndex].power;
     currentMonsterHp -= humanAttack;
-
-    // check for human damage
-    console.log(`human damaged dealt: ${humanAttack}`);
-    console.log(hp);
 
     monsterHp.innerText = currentMonsterHp;
     return isMonsterDefeated();
@@ -540,8 +527,6 @@ const isMonsterDefeated = () => {
         monsters[monsterIndex].level;
       hp -= monsterAttack2;
       hpText.innerText = hp;
-      // check for monster damage
-      console.log(`monster damaged dealt: ${monsterAttack2}`);
 
       text.innerText = `You have attacked the monster with your ${
         weapons[currentWeaponIndex].name
@@ -549,17 +534,9 @@ const isMonsterDefeated = () => {
         Math.floor(Math.random() * xp) + weapons[currentWeaponIndex].power
       } damage.\n
       The ${monsterName.innerText} hits you for ${monsterAttack2} damage`;
-
-      // check monster level
-      console.log(`monster level: ${monsters[monsterIndex].level}`);
-
-      // check monster hp
-      console.log(`monsterHp = ${monsterHp.innerText}`);
     } else {
       hp -= monsterAttack;
       hpText.innerText = hp;
-      // check for monster damage
-      console.log(`monster damaged dealt: ${monsterAttack}`);
 
       text.innerText = `You have attacked the monster with your ${
         weapons[currentWeaponIndex].name
@@ -567,12 +544,6 @@ const isMonsterDefeated = () => {
         Math.floor(Math.random() * xp) + weapons[currentWeaponIndex].power
       } damage.\n
       The ${monsterName.innerText} hits you for ${monsterAttack} damage`;
-
-      // check monster level
-      console.log(`monster level: ${monsters[monsterIndex].level}`);
-
-      // check monster hp
-      console.log(`monsterHp = ${monsterHp.innerText}`);
     }
 
     isPlayerDefeated();
@@ -707,11 +678,6 @@ const goBlock = () => {
     hp += amountRecovered;
     hpText.innerText = hp;
 
-    // check for monster damage
-    console.log(`monster damaged dealt: ${monsterAttack}`);
-    console.log(`block amount: ${blockAmount}`);
-    console.log(`dmg taken: ${damageTaken}`);
-
     text.innerText = `You have blocked the incoming attack from the monster with your ${weapons[currentWeaponIndex].name}, and suffered ${damageTaken} damage. You repositon yourself, and gain ${amountRecovered} of HP.`;
   } else if (
     damageTaken <= 0 &&
@@ -720,30 +686,14 @@ const goBlock = () => {
     hp += Math.floor(amountRecovered * 0.1);
     hpText.innerText = hp;
 
-    // check for monster damage
-    console.log(`monster damaged dealt: ${monsterAttack}`);
-    console.log(`block amount: ${blockAmount}`);
-    console.log(`dmg taken: ${damageTaken}`);
-
     text.innerText = `You have blocked the incoming attack from the monster with your ${
       weapons[currentWeaponIndex].name
     }, and suffered zero damage. You repositon yourself, and gain ${Math.floor(
       amountRecovered * 0.1
     )} of HP.`;
   } else {
-    // check for monster damage
-    console.log(`monster damaged dealt: ${monsterAttack}`);
-    console.log(`block amount: ${blockAmount}`);
-    console.log(`dmg taken: ${damageTaken}`);
-
     text.innerText = `You have blocked the incoming attack from the monster with your ${weapons[currentWeaponIndex].name}, and suffered zero damage. You repositon yourself, ready to strike.`;
   }
-
-  // check monster level
-  console.log(`monster level: ${monsters[monsterIndex].level}`);
-
-  // check monster hp
-  console.log(`monsterHp = ${monsterHp.innerText}`);
 
   isPlayerDefeated();
 };
