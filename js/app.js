@@ -664,7 +664,8 @@ const checkLocations = () => {
     button1.innerText = locations[1].buttonText[0];
     button2.innerText = locations[1].buttonText[0];
     button3.innerText = locations[1].buttonText[0];
-    text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. But is that really it?`;
+    text.innerText += `\n
+    You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. But is that really it?`;
     button1.onclick = goTown;
     button2.onclick = goTown;
     button3.onclick = goTown;
