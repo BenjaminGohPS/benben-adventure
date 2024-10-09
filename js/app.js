@@ -71,6 +71,9 @@ const monsters = [
     name: "Golden Goose",
     level: 100,
     hp: 5000,
+    image:
+      "https://image.lexica.art/full_webp/3e045ced-7849-4ef5-a329-84414f997c52",
+    alt: "golden goose flying",
   },
 ];
 const locations = [
@@ -120,6 +123,9 @@ const locations = [
     name: "Golden Goose",
     buttonText: ["Attack", "Catch", "Dance"],
     text: `A new location appeared next to town. I mean, it's just there...Why not check it out right?\nA Golden Goose looks at you with disdain. You have no idea what to make of it. All you can think of, is having the goose Hong Kong roasted style! `,
+    image:
+      "https://image.lexica.art/full_webp/8245210f-8c4c-4fb9-8f02-feef47f29365",
+    alt: "lake in a forest",
   },
   {
     //locations[6]
@@ -159,7 +165,7 @@ const locations = [
 const weaponInventory = [];
 
 const weapons = [
-  { name: "Trusty Knuckles", power: 100 },
+  { name: "Trusty Knuckles", power: 1000 },
   { name: "The Stick", power: 3, cost: 50 },
   { name: "Pocket Knife", power: 7, cost: 100 },
   { name: "Le Daggar", power: 15, cost: 200 },
@@ -193,7 +199,7 @@ const init = () => {
   button3.onclick = goDragon;
   render();
 
-  hp = 100;
+  hp = 10;
   gold = 50;
   xp = 0;
   currentWeaponIndex = 0;
@@ -349,8 +355,8 @@ const goGoose = () => {
   button2.onclick = fightGoose;
   button3.onclick = fightGoose;
   button4.style.display = "none";
-  // areaImage.src = locations[5].image;
-  // areaImage.alt = locations[5].alt;
+  areaImage.src = locations[5].image;
+  areaImage.alt = locations[5].alt;
 };
 
 const goReplay = () => {
@@ -381,15 +387,6 @@ const fightSlime = () => {
 
   areaImage.src = monsters[0].image;
   areaImage.alt = monsters[0].alt;
-  /*
-  const monster = [
-    {
-      name: "Slime",
-      level: 1,
-      hp: 5,
-    },
-  ];
-*/
 };
 
 const fightWolf = () => {
@@ -400,14 +397,6 @@ const fightWolf = () => {
 
   areaImage.src = monsters[1].image;
   areaImage.alt = monsters[1].alt;
-  /*
-    const monster = [
-      {
-    name: "Wolf",
-    level: 5,
-    hp: 20,
-  },
-  */
 };
 
 const fightGoblin = () => {
@@ -418,14 +407,6 @@ const fightGoblin = () => {
 
   areaImage.src = monsters[2].image;
   areaImage.alt = monsters[2].alt;
-  /*
-    const monster = [
-      {
-    name: "Goblin",
-    level: 13,
-    hp: 50,
-  },
-  */
 };
 
 const fightDragon = () => {
@@ -439,13 +420,6 @@ const fightDragon = () => {
 
   areaImage.src = monsters[3].image;
   areaImage.alt = monsters[3].alt;
-  /*
-  {
-    name: "Dragon",
-    level: 50,
-    hp: 200,
-  },
-  */
 };
 
 const fightGoose = () => {
@@ -455,21 +429,12 @@ const fightGoose = () => {
   text.innerText +=
     "You can't stop drooling as you stare at the plump Golden Goose";
 
-  //   areaImage.src = monsters[4].image;
-  // areaImage.alt = monsters[4].alt;
+  areaImage.src = monsters[4].image;
+  areaImage.alt = monsters[4].alt;
 };
 
 const goAttack = () => {
   //attack codes
-  /* for easy ref
-  const weapons = [
-    { name: "trusty knuckles", power: 1 },
-    { name: "The Stick", power: 5 },
-  ];
-  */
-
-  // think simple first. how do you attack the slime?
-  // next, how does the slime attack you?
 
   let currentMonsterHp = monsterHp.innerText;
 
@@ -482,6 +447,7 @@ const goAttack = () => {
     // check for human damage
     console.log(`human damaged dealt: ${humanAttack}`);
     console.log(hp);
+
     monsterHp.innerText = currentMonsterHp;
     return isMonsterDefeated();
   } else {
@@ -511,10 +477,11 @@ const isMonsterDefeated = () => {
 
     defeatMonster();
   } else {
+    // how does the monster dmg me?
     let monsterAttack =
       Math.floor(Math.random() * monsters[monsterIndex].level) +
       monsters[monsterIndex].level;
-    hp -= monsterAttack; // how does the monster dmg me?
+    hp -= monsterAttack;
     hpText.innerText = hp;
     // check for monster damage
     console.log(`monster damaged dealt: ${monsterAttack}`);
@@ -618,7 +585,9 @@ const checkLocations = () => {
     button1.innerText = locations[9].buttonText[0];
     button2.innerText = locations[9].buttonText[0];
     button3.innerText = locations[9].buttonText[0];
-    text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. This time, it really is done. Enjoy your roasted Golden Goose, Hong Kong Style!`;
+    text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. This time, it really is done. Enjoy your roasted Golden Goose, Hong Kong Style!\n
+    Thank you for playing! Hope you had as much fun, as I did creating this!\n
+    Yours Truly: Benjamin Goh`;
     button1.onclick = goReplay;
     button2.onclick = goReplay;
     button3.onclick = goReplay;
@@ -637,7 +606,7 @@ const goBlock = () => {
   let amountRecovered = Math.floor(Math.random() * blockAmount);
 
   if (damageTaken > 0) {
-    hp -= damageTaken; // how does the monster dmg me?
+    hp -= damageTaken;
 
     hp += amountRecovered;
     hpText.innerText = hp;
@@ -699,11 +668,6 @@ const buyHp = () => {
 };
 
 const buyWeapon = () => {
-  //buy weapon
-  /* 
-  start simple. when button is clicked, buys weapon.
-  weapon goes to array.
-  */
   warning.style.display = "none";
   if (gold >= weapons[currentWeaponIndex + 1].cost) {
     gold -= weapons[currentWeaponIndex + 1].cost;
