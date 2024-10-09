@@ -39,21 +39,33 @@ const monsters = [
     name: "Slime",
     level: 1,
     hp: 5,
+    image:
+      "https://image.tensorartassets.com/cdn-cgi/image/anim=false,plain=false,w=1024,f=jpeg,q=85/posts/images/613920095827259840/26f82663-388c-48f9-87f9-52b89cfda399.jpg",
+    alt: "green slime",
   },
   {
     name: "Wolf",
     level: 5,
     hp: 20,
+    image:
+      "https://image.lexica.art/full_webp/d6a82bfa-9afe-432d-9399-fd7cd9f0e734",
+    alt: "menancing wolf with the full moon in the background",
   },
   {
     name: "Goblin",
     level: 13,
     hp: 80,
+    image:
+      "https://image.lexica.art/full_webp/2e7cd441-1412-4722-adc7-d323e555b916",
+    alt: "fierce goblin",
   },
   {
     name: "Dragon",
     level: 50,
     hp: 200,
+    image:
+      "https://image.lexica.art/full_webp/a3373ad9-d757-4c2e-82dc-3f90a2279097",
+    alt: "portrait of a of a blue-scaled dragon with a golden shimmer",
   },
   {
     name: "Golden Goose",
@@ -70,8 +82,8 @@ const locations = [
     text2:
       "Now that you have defeated the dragon, you can't help but wonder is there really only ONE dragon? Wait a minute....what's that??",
     image:
-      "https://image.lexica.art/full_webp/a0ad1045-2e7c-44e9-afca-2cf952ae9448",
-    alt: "girl standing in the entrance of a forest",
+      "https://image.lexica.art/full_webp/13925c76-0410-411f-9307-b961b0347d95",
+    alt: "cottage looking town",
   },
   {
     //locations[1]
@@ -87,6 +99,9 @@ const locations = [
     name: "Forest",
     buttonText: ["Town", "Inner Forest", "Fight Slime"],
     text: "You have enter the Forest.\nThe view in front of you can only be describe as calm and serene. The way back to town is right behind you. Ahead lies the inner forest. Perhaps you can do some training here as Slimes are found abundantly here in the Forest",
+    image:
+      "https://image.lexica.art/full_webp/a0ad1045-2e7c-44e9-afca-2cf952ae9448",
+    alt: "girl standing in the entrance of a forest",
   },
   {
     //locations[3]
@@ -111,18 +126,27 @@ const locations = [
     name: "Inner Forest",
     buttonText: ["Town", "Cave", "Fight Wolf"],
     text: "You have enter the Inner Forest. With trunks as huge as a house, and branches reaching way up into the sky. You can't help but be in awe at the sheer magnitude of the trees in this region.\nThe way back to town is through the forest behind you. Ahead lies a cave with a huge entrance. Your instincts tells you, you have to be stronger before proceeding further.",
+    image:
+      "https://image.lexica.art/full_webp/afefdaf0-64bd-4858-811c-de1e33d4e9f5",
+    alt: "dark forest",
   },
   {
     //locations[7]
     name: "Cave",
     buttonText: ["Town", "Inner Forest", "Fight Goblin"],
     text: "You have enter the Cave. The air in the cave feels moist and stuffy. You wonder what lies ahead.\nThe way back to town is through the forest behind you. Your senses tells you to leave while you still can.",
+    image:
+      "https://image.lexica.art/full_webp/af2181ee-94ca-4d9e-81d3-66f135dcda0e",
+    alt: "cave",
   },
   {
     //locations[8]
     name: "Dragon Den",
     buttonText: ["Town", "Fight Dragon", "NOT USED"],
     text: "You have enter the Dragon Den. The beast stares at you with it's petrifying eyes.\nThere is no need to risk your life for this.",
+    image:
+      "https://image.lexica.art/full_webp/a606c7e5-2141-4990-8fc1-1b01adc50a2f",
+    alt: "open space with flying dragon",
   },
   {
     //locations[9]
@@ -135,7 +159,7 @@ const locations = [
 const weaponInventory = [];
 
 const weapons = [
-  { name: "Trusty Knuckles", power: 1 },
+  { name: "Trusty Knuckles", power: 100 },
   { name: "The Stick", power: 3, cost: 50 },
   { name: "Pocket Knife", power: 7, cost: 100 },
   { name: "Le Daggar", power: 15, cost: 200 },
@@ -183,6 +207,9 @@ const init = () => {
   xpText.innerText = xp;
   weaponNameText.innerText = weaponInventory[currentWeaponIndex].name;
   weaponPowerText.innerText = weaponInventory[currentWeaponIndex].power;
+
+  areaImage.src = locations[2].image;
+  areaImage.alt = locations[2].alt;
 };
 
 // is this needed?
@@ -262,6 +289,8 @@ const goForest = () => {
   button2.onclick = goInnerForest;
   button3.onclick = fightSlime;
   button4.style.display = "none";
+  areaImage.src = locations[2].image;
+  areaImage.alt = locations[2].alt;
 };
 
 const goInnerForest = () => {
@@ -275,6 +304,8 @@ const goInnerForest = () => {
   button1.onclick = goTown;
   button2.onclick = goCave;
   button3.onclick = fightWolf;
+  areaImage.src = locations[6].image;
+  areaImage.alt = locations[6].alt;
 };
 
 const goCave = () => {
@@ -288,6 +319,8 @@ const goCave = () => {
   button1.onclick = goTown;
   button2.onclick = goInnerForest;
   button3.onclick = fightGoblin;
+  areaImage.src = locations[7].image;
+  areaImage.alt = locations[7].alt;
 };
 
 const goDragon = () => {
@@ -303,6 +336,8 @@ const goDragon = () => {
   button1.onclick = goTown;
   button2.onclick = fightDragon;
   button3.onclick = "";
+  areaImage.src = locations[8].image;
+  areaImage.alt = locations[8].alt;
 };
 
 const goGoose = () => {
@@ -315,6 +350,8 @@ const goGoose = () => {
   button2.onclick = fightGoose;
   button3.onclick = fightGoose;
   button4.style.display = "none";
+  // areaImage.src = locations[5].image;
+  // areaImage.alt = locations[5].alt;
 };
 
 const goReplay = () => {
@@ -343,6 +380,8 @@ const fightSlime = () => {
   fightIni();
   text.innerText += "The Slime smiles at you while bouncing on the spot.";
 
+  areaImage.src = monsters[0].image;
+  areaImage.alt = monsters[0].alt;
   /*
   const monster = [
     {
@@ -360,6 +399,8 @@ const fightWolf = () => {
   text.innerText +=
     "The Wolf stares at you while bearing it's fangs menacingly.";
 
+  areaImage.src = monsters[1].image;
+  areaImage.alt = monsters[1].alt;
   /*
     const monster = [
       {
@@ -376,6 +417,8 @@ const fightGoblin = () => {
   text.innerText +=
     "'FEE FIA FOE FUM', says the Goblin in a cave-rumbling voice.";
 
+  areaImage.src = monsters[2].image;
+  areaImage.alt = monsters[2].alt;
   /*
     const monster = [
       {
@@ -394,6 +437,9 @@ const fightDragon = () => {
   text.innerText +=
     "The Dragon stares at you, while arching it's body just like a cat, ready to pounce at you.";
   button3.style.display = "block";
+
+  areaImage.src = monsters[3].image;
+  areaImage.alt = monsters[3].alt;
   /*
   {
     name: "Dragon",
@@ -409,6 +455,9 @@ const fightGoose = () => {
 
   text.innerText +=
     "You can't stop drooling as you stare at the plump Golden Goose";
+
+  //   areaImage.src = monsters[4].image;
+  // areaImage.alt = monsters[4].alt;
 };
 
 const goAttack = () => {
@@ -498,10 +547,32 @@ const defeatMonster = () => {
   Gold obtained: ${Math.floor(monsters[monsterIndex].level * 3)}
   XP obtained: ${Math.floor(monsters[monsterIndex].level)}`;
 
+  // areaImage.src = locations[4].image;
+  // areaImage.alt = locations[4].alt;
   checkLocations();
 };
 
 const checkLocations = () => {
+  // switch (monsterIndex) {
+  //   case "0":
+  //     button1.innerText = locations[2].buttonText[0];
+  //     button2.innerText = locations[2].buttonText[1];
+  //     button3.innerText = locations[2].buttonText[2];
+
+  //     button1.onclick = goTown;
+  //     button2.onclick = goInnerForest;
+  //     button3.onclick = fightSlime;
+  //     break;
+  //   case "1":
+  //     button1.innerText = locations[6].buttonText[0];
+  //     button2.innerText = locations[6].buttonText[1];
+  //     button3.innerText = locations[6].buttonText[2];
+
+  //     button1.onclick = goTown;
+  //     button2.onclick = goCave;
+  //     button3.onclick = fightWolf;
+  //     break;
+  // }
   if (monsterIndex === 0) {
     button1.innerText = locations[2].buttonText[0];
     button2.innerText = locations[2].buttonText[1];
@@ -510,6 +581,9 @@ const checkLocations = () => {
     button1.onclick = goTown;
     button2.onclick = goInnerForest;
     button3.onclick = fightSlime;
+
+    areaImage.src = locations[2].image;
+    areaImage.alt = locations[2].alt;
   } else if (monsterIndex === 1) {
     button1.innerText = locations[6].buttonText[0];
     button2.innerText = locations[6].buttonText[1];
@@ -518,6 +592,9 @@ const checkLocations = () => {
     button1.onclick = goTown;
     button2.onclick = goCave;
     button3.onclick = fightWolf;
+
+    areaImage.src = locations[6].image;
+    areaImage.alt = locations[6].alt;
   } else if (monsterIndex === 2) {
     button1.innerText = locations[7].buttonText[0];
     button2.innerText = locations[7].buttonText[1];
@@ -526,6 +603,9 @@ const checkLocations = () => {
     button1.onclick = goTown;
     button2.onclick = goInnerForest;
     button3.onclick = fightGoblin;
+
+    areaImage.src = locations[7].image;
+    areaImage.alt = locations[7].alt;
   } else if (monsterIndex === 3) {
     button1.innerText = locations[1].buttonText[0];
     button2.innerText = locations[1].buttonText[0];
