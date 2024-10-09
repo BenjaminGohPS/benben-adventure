@@ -200,7 +200,7 @@ const init = () => {
   render();
 
   hp = 10;
-  gold = 50;
+  gold = 5000;
   xp = 0;
   currentWeaponIndex = 0;
   weaponInventory.push(weapons[currentWeaponIndex]);
@@ -247,9 +247,7 @@ const goShop = () => {
   //function on button when clicked to go shop
   button1.innerText = locations[1].buttonText[0];
   button2.innerText = locations[1].buttonText[1];
-  button3.innerText =
-    locations[1].buttonText[2] +
-    `: ${weapons[currentWeaponIndex + 1].cost} gold`;
+
   button4.style.display = "block";
   button4.innerText = locations[1].buttonText[3];
 
@@ -260,6 +258,14 @@ const goShop = () => {
   button4.onclick = goWarning;
   areaImage.src = locations[1].image;
   areaImage.alt = locations[1].alt;
+
+  if (currentWeaponIndex < 5) {
+    button3.innerText =
+      locations[1].buttonText[2] +
+      `: ${weapons[currentWeaponIndex + 1].cost} gold`;
+  } else {
+    button3.style.display = "none";
+  }
 };
 
 const goTown = () => {
@@ -683,6 +689,7 @@ const buyWeapon = () => {
       weaponPowerText.innerText = weapons[currentWeaponIndex].power;
       text.innerText = `You have purchased, and equipped a new weapon.\n"No refunds accepted for goods sold!", says the Shopkeeper.`;
     } else {
+      button3.innerText = "";
       button3.style.display = "none";
       weaponNameText.innerText = weapons[currentWeaponIndex].name;
       weaponPowerText.innerText = weapons[currentWeaponIndex].power;
