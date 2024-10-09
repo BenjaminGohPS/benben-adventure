@@ -212,7 +212,6 @@ const init = () => {
   areaImage.alt = locations[2].alt;
 };
 
-// is this needed?
 const render = () => {
   //code to render
   warning.style.display = "none";
@@ -633,15 +632,47 @@ const goBlock = () => {
     Math.floor(Math.random() * monsters[monsterIndex].level) +
     monsters[monsterIndex].level;
 
-  let blockAmount = weapons[currentWeaponIndex].power;
-  hp -= monsterAttack - blockAmount; // how does the monster dmg me?
-  hp += blockAmount;
-  hpText.innerText = hp;
-  // check for monster damage
-  console.log(`monster damaged dealt: ${monsterAttack}`);
-  console.log(`block amount: ${blockAmount}`);
+  let blockAmount = Math.floor(weapons[currentWeaponIndex].power * 0.5);
+  let damageTaken = monsterAttack - blockAmount;
+  let amountRecovered = Math.floor(Math.random() * blockAmount);
 
-  text.innerText = `You have blocked the incoming attack from the monster with your ${weapons[currentWeaponIndex].name}. You repositon yourself, and gain ${blockAmount} of HP.`;
+  if (damageTaken > 0) {
+    hp -= damageTaken; // how does the monster dmg me?
+
+    hp += amountRecovered;
+    hpText.innerText = hp;
+
+    // check for monster damage
+    console.log(`monster damaged dealt: ${monsterAttack}`);
+    console.log(`block amount: ${blockAmount}`);
+    console.log(`dmg taken: ${damageTaken}`);
+
+    text.innerText = `You have blocked the incoming attack from the monster with your ${weapons[currentWeaponIndex].name}, and suffered ${damageTaken} damage. You repositon yourself, and gain ${amountRecovered} of HP.`;
+  } else if (
+    damageTaken <= 0 &&
+    weapons[currentWeaponIndex].power <= monsters[monsterIndex].hp
+  ) {
+    hp += Math.floor(amountRecovered * 0.1);
+    hpText.innerText = hp;
+
+    // check for monster damage
+    console.log(`monster damaged dealt: ${monsterAttack}`);
+    console.log(`block amount: ${blockAmount}`);
+    console.log(`dmg taken: ${damageTaken}`);
+
+    text.innerText = `You have blocked the incoming attack from the monster with your ${
+      weapons[currentWeaponIndex].name
+    }, and suffered zero damage. You repositon yourself, and gain ${Math.floor(
+      amountRecovered * 0.1
+    )} of HP.`;
+  } else {
+    // check for monster damage
+    console.log(`monster damaged dealt: ${monsterAttack}`);
+    console.log(`block amount: ${blockAmount}`);
+    console.log(`dmg taken: ${damageTaken}`);
+
+    text.innerText = `You have blocked the incoming attack from the monster with your ${weapons[currentWeaponIndex].name}, and suffered zero damage. You repositon yourself, ready to strike.`;
+  }
 
   // check monster level
   console.log(`monster level: ${monsters[monsterIndex].level}`);
