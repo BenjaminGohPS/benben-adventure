@@ -165,7 +165,7 @@ const locations = [
 const weaponInventory = [];
 
 const weapons = [
-  { name: "Trusty Knuckles", power: 1 },
+  { name: "Trusty Knuckles", power: 1000 },
   {
     name: "The Stick",
     power: 3,
@@ -225,7 +225,7 @@ const init = () => {
   button3.onclick = goDragon;
   render();
 
-  hp = 100;
+  hp = 1000;
   gold = 50;
   xp = 0;
   currentWeaponIndex = 0;
@@ -580,22 +580,28 @@ const isMonsterDefeated = () => {
 };
 
 const defeatMonster = () => {
+  let goldGain = 0;
+  let xpGain = 0;
   if (dragonDefeat === 1 && monsterIndex < 3) {
-    gold += Math.floor(monsters[monsterIndex].level * 3 * 10);
+    goldGain = Math.floor(monsters[monsterIndex].level * 3 * 10);
+    gold += goldGain;
     goldText.innerText = gold;
 
-    xp += Math.floor(monsters[monsterIndex].level * 10);
+    xpGain = Math.floor(monsters[monsterIndex].level * 10);
+    xp += xpGain;
     xpText.innerText = xp;
   } else {
-    gold += Math.floor(monsters[monsterIndex].level * 3);
+    goldGain = Math.floor(monsters[monsterIndex].level * 3);
+    gold += goldGain;
     goldText.innerText = gold;
 
-    xp += Math.floor(monsters[monsterIndex].level);
+    xpGain = Math.floor(monsters[monsterIndex].level);
+    xp += xpGain;
     xpText.innerText = xp;
   }
   text.innerText = `You have defeated the ${monsters[monsterIndex].name}.
-  Gold obtained: ${Math.floor(monsters[monsterIndex].level * 3)}
-  XP obtained: ${Math.floor(monsters[monsterIndex].level)}`;
+  Gold obtained: ${goldGain}
+  XP obtained: ${xpGain}`;
 
   checkLocations();
 };
@@ -679,13 +685,20 @@ const checkLocations = () => {
 
 const goBlock = () => {
   //block codes
-  let monsterAttack =
-    Math.floor(Math.random() * monsters[monsterIndex].level) +
-    monsters[monsterIndex].level;
-
+  let monsterAttack = 0;
   let blockAmount = Math.floor(weapons[currentWeaponIndex].power * 0.5);
   let damageTaken = monsterAttack - blockAmount;
   let amountRecovered = Math.floor(Math.random() * blockAmount);
+
+  if (dragonDefeat === 1 && monsterIndex < 3) {
+    monsterAttack =
+      Math.floor(Math.random() * monsters[monsterIndex].level * 10) +
+      monsters[monsterIndex].level;
+  } else {
+    monsterAttack =
+      Math.floor(Math.random() * monsters[monsterIndex].level) +
+      monsters[monsterIndex].level;
+  }
 
   if (damageTaken > 0) {
     hp -= damageTaken;
