@@ -165,12 +165,38 @@ const locations = [
 const weaponInventory = [];
 
 const weapons = [
-  { name: "Trusty Knuckles", power: 1000 },
-  { name: "The Stick", power: 3, cost: 50 },
-  { name: "Pocket Knife", power: 7, cost: 100 },
-  { name: "Le Daggar", power: 15, cost: 200 },
-  { name: "Big-Ass-Sword", power: 31, cost: 400 },
-  { name: "Accupuncture Set", power: 66, cost: 1000 },
+  { name: "Trusty Knuckles", power: 100 },
+  {
+    name: "The Stick",
+    power: 3,
+    cost: 50,
+    text: 'You can\'t believe you paid 50 gold for a stick. "THE STICK, you mean?", says the ShopKeeper. *SIGH* ',
+  },
+  {
+    name: "Pocket Knife",
+    power: 7,
+    cost: 100,
+    text: "Now this is what I am talking about! A Pocket Knife will help in dispatching the monsters faced in your journeys",
+  },
+  {
+    name: "Le Daggar",
+    power: 15,
+    cost: 200,
+    text: "You finally get the feeling, that you are getting into the league where the big boys plays! Let's go Le Daggar!",
+  },
+  {
+    name: "Big-Ass-Sword",
+    power: 31,
+    cost: 400,
+    text: `With a name like this, you are confident that no monster shall be able to withstand your prowess! Watch out for my Big-Ass mother...\n
+    'No swearing in here, or I will break you!', says the ShopKeeper.`,
+  },
+  {
+    name: "Accupuncture Set",
+    power: 66,
+    cost: 1000,
+    text: "You are not sure what to make out of the Accupuncture Set. It can either relieve the monster's years of aliments, or relieve them of their lives... ",
+  },
 ];
 
 /*----- Cached Element References  -----*/
@@ -199,7 +225,7 @@ const init = () => {
   button3.onclick = goDragon;
   render();
 
-  hp = 10;
+  hp = 1000;
   gold = 5000;
   xp = 0;
   currentWeaponIndex = 0;
@@ -385,11 +411,21 @@ const fightIni = () => {
   button1.onclick = goAttack;
   button2.onclick = goBlock;
   button3.onclick = goTown;
+
+  if (dragonDefeat === 1) {
+    monsterHp.innerText = monsters[monsterIndex].hp * 10;
+  }
 };
+
 const fightSlime = () => {
   monsterIndex = 0;
   fightIni();
-  text.innerText += "The Slime smiles at you while bouncing on the spot.";
+  text.innerText += "The Slime smiles at you while bouncing on the spot";
+
+  if (dragonDefeat === 1) {
+    let text2 = `\nWithout the supressing aura of the dragon in this region, the monsters have increase in strength.`;
+    text.innerText += text2;
+  }
 
   areaImage.src = monsters[0].image;
   areaImage.alt = monsters[0].alt;
@@ -401,6 +437,11 @@ const fightWolf = () => {
   text.innerText +=
     "The Wolf stares at you while bearing it's fangs menacingly.";
 
+  if (dragonDefeat === 1) {
+    let text2 = `\nWithout the supressing aura of the dragon in this region, the monsters have increase in strength.`;
+    text.innerText += text2;
+  }
+
   areaImage.src = monsters[1].image;
   areaImage.alt = monsters[1].alt;
 };
@@ -410,6 +451,11 @@ const fightGoblin = () => {
   fightIni();
   text.innerText +=
     "'FEE FIA FOE FUM', says the Goblin in a cave-rumbling voice.";
+
+  if (dragonDefeat === 1) {
+    let text2 = `\nWithout the supressing aura of the dragon in this region, the monsters have increase in strength.`;
+    text.innerText += text2;
+  }
 
   areaImage.src = monsters[2].image;
   areaImage.alt = monsters[2].alt;
@@ -487,23 +533,47 @@ const isMonsterDefeated = () => {
     let monsterAttack =
       Math.floor(Math.random() * monsters[monsterIndex].level) +
       monsters[monsterIndex].level;
-    hp -= monsterAttack;
-    hpText.innerText = hp;
-    // check for monster damage
-    console.log(`monster damaged dealt: ${monsterAttack}`);
 
-    text.innerText = `You have attacked the monster with your ${
-      weapons[currentWeaponIndex].name
-    }, and dealt ${
-      Math.floor(Math.random() * xp) + weapons[currentWeaponIndex].power
-    } damage.\n
-    The ${monsterName.innerText} hits you for ${monsterAttack} damage`;
+    if (dragonDefeat === 1) {
+      let monsterAttack2 =
+        Math.floor(Math.random() * monsters[monsterIndex].level * 10) +
+        monsters[monsterIndex].level;
+      hp -= monsterAttack2;
+      hpText.innerText = hp;
+      // check for monster damage
+      console.log(`monster damaged dealt: ${monsterAttack2}`);
 
-    // check monster level
-    console.log(`monster level: ${monsters[monsterIndex].level}`);
+      text.innerText = `You have attacked the monster with your ${
+        weapons[currentWeaponIndex].name
+      }, and dealt ${
+        Math.floor(Math.random() * xp) + weapons[currentWeaponIndex].power
+      } damage.\n
+      The ${monsterName.innerText} hits you for ${monsterAttack2} damage`;
 
-    // check monster hp
-    console.log(`monsterHp = ${monsterHp.innerText}`);
+      // check monster level
+      console.log(`monster level: ${monsters[monsterIndex].level}`);
+
+      // check monster hp
+      console.log(`monsterHp = ${monsterHp.innerText}`);
+    } else {
+      hp -= monsterAttack;
+      hpText.innerText = hp;
+      // check for monster damage
+      console.log(`monster damaged dealt: ${monsterAttack}`);
+
+      text.innerText = `You have attacked the monster with your ${
+        weapons[currentWeaponIndex].name
+      }, and dealt ${
+        Math.floor(Math.random() * xp) + weapons[currentWeaponIndex].power
+      } damage.\n
+      The ${monsterName.innerText} hits you for ${monsterAttack} damage`;
+
+      // check monster level
+      console.log(`monster level: ${monsters[monsterIndex].level}`);
+
+      // check monster hp
+      console.log(`monsterHp = ${monsterHp.innerText}`);
+    }
 
     isPlayerDefeated();
   }
@@ -687,13 +757,13 @@ const buyWeapon = () => {
         `: ${weapons[currentWeaponIndex + 1].cost} gold`;
       weaponNameText.innerText = weapons[currentWeaponIndex].name;
       weaponPowerText.innerText = weapons[currentWeaponIndex].power;
-      text.innerText = `You have purchased, and equipped a new weapon.\n"No refunds accepted for goods sold!", says the Shopkeeper.`;
+      text.innerText = `You have purchased, and equipped a new weapon.\n"No refunds accepted for goods sold!", says the Shopkeeper.\n${weapons[currentWeaponIndex].text}`;
     } else {
       button3.innerText = "";
       button3.style.display = "none";
       weaponNameText.innerText = weapons[currentWeaponIndex].name;
       weaponPowerText.innerText = weapons[currentWeaponIndex].power;
-      return (text.innerText = `You have purchased, and equipped a new weapon.\n"That's the last of it. No more weapons for you.", says the Shopkeeper.`);
+      return (text.innerText = `You have purchased, and equipped a new weapon.\n"That's the last of it. No more weapons for you.", says the Shopkeeper.\n${weapons[currentWeaponIndex].text}`);
     }
   } else {
     text.innerText = `"No touching! You break it, I break you!!"`;
