@@ -659,7 +659,6 @@ const goBlock = () => {
 
   if (damageTaken > 0) {
     hp -= damageTaken;
-
     hp += amountRecovered;
     hpText.innerText = hp;
 
