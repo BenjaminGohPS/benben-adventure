@@ -116,7 +116,7 @@ const locations = [
     text: "You have engage the monster.",
   },
   {
-    //locations[4] not used
+    //locations[4]
     name: "Win",
     buttonText: ["Attack", "Block", "Run"],
     text: `You have engage the monster; The ${monsters[monsterIndex].name}.`,
@@ -832,9 +832,3 @@ init();
 document.querySelector("#buttons").addEventListener("click", playGame);
 document.querySelector("#godMode").addEventListener("click", youStrong);
 /*----------- PERSONAL NOTES ----------*/
-/*
-monster gold, monster attack -> will be randomise by math formula
-
-warning.style.display = "none";
-button4.style.display = "none";
-*/
