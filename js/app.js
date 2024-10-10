@@ -26,6 +26,7 @@ const button4 = document.getElementById("button4");
 const text = document.getElementById("text");
 
 const warning = document.getElementById("warning");
+const godMode = document.getElementById("godMode");
 
 const popoverTriggerList = document.querySelectorAll(
   '[data-bs-toggle="popover"]'
@@ -814,10 +815,22 @@ const playGame = (event) => {
   }
 };
 
+const youStrong = () => {
+  hp = 10000;
+  gold = 5000;
+  weapons[currentWeaponIndex].power = 5000;
+
+  hpText.innerText = hp;
+  goldText.innerText = gold;
+  weaponPowerText.innerText = weapons[currentWeaponIndex].power;
+
+  text.innerText = `Hey now, you do know technically this is not fair right. Then again...Nothing is fair. Shall we save the townfolks now :)`;
+};
+
 init();
 /*----------- Event Listeners ----------*/
 document.querySelector("#buttons").addEventListener("click", playGame);
-
+document.querySelector("#godMode").addEventListener("click", youStrong);
 /*----------- PERSONAL NOTES ----------*/
 /*
 monster gold, monster attack -> will be randomise by math formula
