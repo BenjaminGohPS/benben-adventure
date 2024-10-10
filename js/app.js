@@ -83,7 +83,9 @@ const locations = [
     buttonText: ["Shop", "Forest", "Dragon Den", "???"],
     text: "You are now standing at the town square. To your left is the store. Up ahead is the forest. To the right of the town, lies the fearsome Dragon. You heard of how the health of the townsfolk have suffered ever since the dragon appeared, and causing the surrounding monsters to be agressive towards any who transpasses.",
     text2:
-      "Now that you have defeated the dragon, you can't help but wonder is there really only ONE dragon? Wait a minute....what's that??",
+      `The town square is bustling with people. You recognised old Granny Emma, who always greets you when you returned to town from your adventures, walking towards you.\n
+      Granny Emma grabs you on your arm, and with a wide smile on her face, lets you know that the persistent cough she had, is no longer bothering her.\nShe gestured to the crowd in front of the store, and said that many of the townfolks' condition have alivated. However, Granny Emma mentioned that I should still be cautious when entering the Forest and beyond.\n
+      Now that you have defeated the dragon, you can't help but wonder is there really only ONE dragon? Wait a minute....what's that??`,
     image:
       "https://image.lexica.art/full_webp/13925c76-0410-411f-9307-b961b0347d95",
     alt: "cottage looking town",
@@ -165,7 +167,7 @@ const locations = [
 const weaponInventory = [];
 
 const weapons = [
-  { name: "Trusty Knuckles", power: 1 },
+  { name: "Trusty Knuckles", power: 1000 },
   {
     name: "The Stick",
     power: 3,
@@ -256,7 +258,7 @@ const isDragonDefeated = () => {
   button3.onclick = goDragon;
   button4.onclick = goGoose;
   warning.style.display = "none";
-  areaImage.src = locations[0].image; // let's change the image!
+  areaImage.src = locations[0].image;
   areaImage.alt = locations[0].alt;
 };
 
@@ -362,7 +364,6 @@ const goDragon = () => {
   text.innerText = locations[8].text;
   button1.onclick = goTown;
   button2.onclick = fightDragon;
-  button3.onclick = "";
   areaImage.src = locations[8].image;
   areaImage.alt = locations[8].alt;
 };
@@ -413,7 +414,7 @@ const fightSlime = () => {
   text.innerText += "The Slime smiles at you while bouncing on the spot";
 
   if (dragonDefeat === 1) {
-    let text2 = `\nWithout the supressing aura of the dragon in this region, the monsters have increase in strength.`;
+    let text2 = `\nWithout the supressing aura of the dragon in this region, the monsters have increased in strength.`;
     text.innerText += text2;
   }
 
@@ -428,7 +429,7 @@ const fightWolf = () => {
     "The Wolf stares at you while bearing it's fangs menacingly.";
 
   if (dragonDefeat === 1) {
-    let text2 = `\nWithout the supressing aura of the dragon in this region, the monsters have increase in strength.`;
+    let text2 = `\nWithout the supressing aura of the dragon in this region, the monsters have increased in strength.`;
     text.innerText += text2;
   }
 
@@ -443,7 +444,7 @@ const fightGoblin = () => {
     "'FEE FIA FOE FUM', says the Goblin in a cave-rumbling voice.";
 
   if (dragonDefeat === 1) {
-    let text2 = `\nWithout the supressing aura of the dragon in this region, the monsters have increase in strength.`;
+    let text2 = `\nWithout the supressing aura of the dragon in this region, the monsters have increased in strength.`;
     text.innerText += text2;
   }
 
@@ -633,7 +634,7 @@ const checkLocations = () => {
     button2.innerText = locations[1].buttonText[0];
     button3.innerText = locations[1].buttonText[0];
     text.innerText += `\n
-    You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. But is that really it?`;
+    You have defeated the ${monsters[monsterIndex].name}. The town is safe once again, right? But is that really it? Let's head back to town.`;
     button1.onclick = goTown;
     button2.onclick = goTown;
     button3.onclick = goTown;
@@ -642,7 +643,7 @@ const checkLocations = () => {
     button1.innerText = locations[9].buttonText[0];
     button2.innerText = locations[9].buttonText[0];
     button3.innerText = locations[9].buttonText[0];
-    text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. This time, it really is done. Enjoy your roasted Golden Goose, Hong Kong Style!\n
+    text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. This time, it really is done. The villages are no longer plague with illness. The monsters, while still there, are no longer hostile to the townfolks. Enjoy your roasted Golden Goose, Hong Kong Style, you deserved it!\n
     Thank you for playing! Hope you had as much fun, as I did creating this!\n
     Yours Truly: Benjamin Goh`;
     button1.onclick = goReplay;
