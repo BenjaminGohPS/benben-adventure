@@ -81,7 +81,7 @@ const locations = [
     //locations[0]
     name: "Town",
     buttonText: ["Shop", "Forest", "Dragon Den", "???"],
-    text: "You are now standing at the town square. To your left is the store. Up ahead is the forest. To the right of the town, lies the fearsome Dragon you have heard from the whispers going around town.",
+    text: "You are now standing at the town square. To your left is the store. Up ahead is the forest. To the right of the town, lies the fearsome Dragon. You heard of how the health of the townsfolk have suffered ever since the dragon appeared, and causing the surrounding monsters to be agressive towards any who transpasses.",
     text2:
       "Now that you have defeated the dragon, you can't help but wonder is there really only ONE dragon? Wait a minute....what's that??",
     image:
@@ -205,7 +205,6 @@ const weapons = [
 
 const init = () => {
   //code to init the game
-  console.log(`If initiation works, this text appears`);
 
   monsterDetails.style.display = "none";
   button1.innerText = locations[0].buttonText[0];
@@ -222,7 +221,7 @@ const init = () => {
   xp = 0;
   currentWeaponIndex = 0;
   weaponInventory.push(weapons[currentWeaponIndex]);
-  console.log(weaponInventory); // check
+
   monsterIndex = 0;
   dragonDefeat = 0;
 
@@ -246,7 +245,7 @@ const isDragonDefeated = () => {
   monsterDetails.style.display = "none";
   button3.style.display = "block";
   button4.style.display = "block";
-  console.log("dragonDefeat should be working");
+
   button1.innerText = locations[0].buttonText[0];
   button2.innerText = locations[0].buttonText[1];
   button3.innerText = locations[0].buttonText[2];
@@ -289,7 +288,6 @@ const goShop = () => {
 const goTown = () => {
   //function on button when clicked to go town
 
-  console.log(dragonDefeat);
   if (dragonDefeat === 0) {
     monsterDetails.style.display = "none";
     button3.style.display = "block";
@@ -325,7 +323,7 @@ const goForest = () => {
 const goInnerForest = () => {
   //function on button when clicked to go inner forest
   monsterIndex = 1;
-  console.log(monsters[monsterIndex].name);
+
   button1.innerText = locations[6].buttonText[0];
   button2.innerText = locations[6].buttonText[1];
   button3.innerText = locations[6].buttonText[2];
@@ -340,7 +338,7 @@ const goInnerForest = () => {
 const goCave = () => {
   //function on button when clicked to go cave
   monsterIndex = 2;
-  console.log(monsters[monsterIndex].name);
+
   button1.innerText = locations[7].buttonText[0];
   button2.innerText = locations[7].buttonText[1];
   button3.innerText = locations[7].buttonText[2];
@@ -357,7 +355,7 @@ const goDragon = () => {
   monsterIndex = 3;
   button3.style.display = "none";
   button4.style.display = "none";
-  console.log(monsters[monsterIndex].name);
+
   button1.innerText = locations[8].buttonText[0];
   button2.innerText = locations[8].buttonText[1];
   button3.innerText = locations[8].buttonText[2];
@@ -506,7 +504,6 @@ const isPlayerDefeated = () => {
     button1.onclick = goReplay;
     button2.onclick = goReplay;
     button3.onclick = goReplay;
-    console.log("isPlayerDefeated is running");
   }
 };
 
@@ -721,7 +718,6 @@ const buyWeapon = () => {
     currentWeaponIndex++;
 
     if (currentWeaponIndex < 5) {
-      console.log(currentWeaponIndex);
       button3.innerText =
         locations[1].buttonText[2] +
         `: ${weapons[currentWeaponIndex + 1].cost} gold`;
