@@ -168,7 +168,7 @@ const locations = [
 const weaponInventory = [];
 
 const weapons = [
-  { name: "Trusty Knuckles", power: 1000 },
+  { name: "Trusty Knuckles", power: 1 },
   {
     name: "The Stick",
     power: 3,
@@ -224,6 +224,12 @@ const init = () => {
   xp = 0;
   currentWeaponIndex = 0;
   weaponInventory.push(weapons[currentWeaponIndex]);
+  weapons[currentWeaponIndex].power = 1;
+  weapons[1].power = 3;
+  weapons[2].power = 7;
+  weapons[3].power = 15;
+  weapons[4].power = 31;
+  weapons[5].power = 1000;
 
   monsterIndex = 0;
   dragonDefeat = 0;
@@ -577,80 +583,60 @@ const defeatMonster = () => {
 };
 
 const checkLocations = () => {
-  // switch (monsterIndex) {
-  //   case "0":
-  //     button1.innerText = locations[2].buttonText[0];
-  //     button2.innerText = locations[2].buttonText[1];
-  //     button3.innerText = locations[2].buttonText[2];
+  switch (monsterIndex) {
+    case 0:
+      button1.innerText = locations[2].buttonText[0];
+      button2.innerText = locations[2].buttonText[1];
+      button3.innerText = locations[2].buttonText[2];
 
-  //     button1.onclick = goTown;
-  //     button2.onclick = goInnerForest;
-  //     button3.onclick = fightSlime;
-  //     break;
-  //   case "1":
-  //     button1.innerText = locations[6].buttonText[0];
-  //     button2.innerText = locations[6].buttonText[1];
-  //     button3.innerText = locations[6].buttonText[2];
+      button1.onclick = goTown;
+      button2.onclick = goInnerForest;
+      button3.onclick = fightSlime;
+      break;
+    case 1:
+      button1.innerText = locations[6].buttonText[0];
+      button2.innerText = locations[6].buttonText[1];
+      button3.innerText = locations[6].buttonText[2];
 
-  //     button1.onclick = goTown;
-  //     button2.onclick = goCave;
-  //     button3.onclick = fightWolf;
-  //     break;
-  // }
-  if (monsterIndex === 0) {
-    button1.innerText = locations[2].buttonText[0];
-    button2.innerText = locations[2].buttonText[1];
-    button3.innerText = locations[2].buttonText[2];
+      button1.onclick = goTown;
+      button2.onclick = goCave;
+      button3.onclick = fightWolf;
+      break;
+    case 2:
+      button1.innerText = locations[7].buttonText[0];
+      button2.innerText = locations[7].buttonText[1];
+      button3.innerText = locations[7].buttonText[2];
 
-    button1.onclick = goTown;
-    button2.onclick = goInnerForest;
-    button3.onclick = fightSlime;
+      button1.onclick = goTown;
+      button2.onclick = goInnerForest;
+      button3.onclick = fightGoblin;
 
-    areaImage.src = locations[2].image;
-    areaImage.alt = locations[2].alt;
-  } else if (monsterIndex === 1) {
-    button1.innerText = locations[6].buttonText[0];
-    button2.innerText = locations[6].buttonText[1];
-    button3.innerText = locations[6].buttonText[2];
-
-    button1.onclick = goTown;
-    button2.onclick = goCave;
-    button3.onclick = fightWolf;
-
-    areaImage.src = locations[6].image;
-    areaImage.alt = locations[6].alt;
-  } else if (monsterIndex === 2) {
-    button1.innerText = locations[7].buttonText[0];
-    button2.innerText = locations[7].buttonText[1];
-    button3.innerText = locations[7].buttonText[2];
-
-    button1.onclick = goTown;
-    button2.onclick = goInnerForest;
-    button3.onclick = fightGoblin;
-
-    areaImage.src = locations[7].image;
-    areaImage.alt = locations[7].alt;
-  } else if (monsterIndex === 3) {
-    button1.innerText = locations[1].buttonText[0];
-    button2.innerText = locations[1].buttonText[0];
-    button3.innerText = locations[1].buttonText[0];
-    text.innerText += `\n
+      areaImage.src = locations[7].image;
+      areaImage.alt = locations[7].alt;
+      break;
+    case 3:
+      button1.innerText = locations[1].buttonText[0];
+      button2.innerText = locations[1].buttonText[0];
+      button3.innerText = locations[1].buttonText[0];
+      text.innerText += `\n
     You have defeated the ${monsters[monsterIndex].name}. The town is safe once again, right? But is that really it? Let's head back to town.`;
-    button1.onclick = goTown;
-    button2.onclick = goTown;
-    button3.onclick = goTown;
-    dragonDefeat = 1;
-  } else {
-    button1.innerText = locations[9].buttonText[0];
-    button2.innerText = locations[9].buttonText[0];
-    button3.innerText = locations[9].buttonText[0];
-    text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. This time, it really is done. The villages are no longer plague with illness. The monsters, while still there, are no longer hostile to the townfolks. Enjoy your roasted Golden Goose, Hong Kong Style, you deserved it!\n
+      button1.onclick = goTown;
+      button2.onclick = goTown;
+      button3.onclick = goTown;
+      dragonDefeat = 1;
+      break;
+    case 4:
+      button1.innerText = locations[9].buttonText[0];
+      button2.innerText = locations[9].buttonText[0];
+      button3.innerText = locations[9].buttonText[0];
+      text.innerText = `You have defeated the ${monsters[monsterIndex].name}. The town is safe once again. This time, it really is done. The townfolks are no longer plague with illness. The monsters, while still there, are no longer hostile to the townfolks. Enjoy your roasted Golden Goose, Hong Kong Style, you deserved it!\n
     Thank you for playing! Hope you had as much fun, as I did creating this!\n
     Yours Truly: Benjamin Goh`;
-    button1.onclick = goReplay;
-    button2.onclick = goReplay;
-    button3.onclick = goReplay;
-    dragonDefeat = 1;
+      button1.onclick = goReplay;
+      button2.onclick = goReplay;
+      button3.onclick = goReplay;
+      dragonDefeat = 1;
+      break;
   }
 };
 
