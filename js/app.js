@@ -184,7 +184,7 @@ const weapons = [
     name: "Le Daggar",
     power: 15,
     cost: 200,
-    text: "You finally get the feeling, that you are getting into the league where the big boys plays! Let's go Le Daggar!",
+    text: "You finally get the feeling, that you are getting into the league where the big boys plays! Let's go Le Daggar! I choose you!",
   },
   {
     name: "Big-Ass-Sword",
