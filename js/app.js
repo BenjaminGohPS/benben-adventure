@@ -644,7 +644,6 @@ const goBlock = () => {
   //block codes
   let monsterAttack = 0;
   let blockAmount = Math.floor(weapons[currentWeaponIndex].power * 0.5);
-  let damageTaken = monsterAttack - blockAmount;
   let amountRecovered = Math.floor(Math.random() * blockAmount);
 
   if (dragonDefeat === 1 && monsterIndex < 3) {
@@ -656,6 +655,8 @@ const goBlock = () => {
       Math.floor(Math.random() * monsters[monsterIndex].level) +
       monsters[monsterIndex].level;
   }
+
+  let damageTaken = monsterAttack - blockAmount;
 
   if (damageTaken > 0) {
     hp -= damageTaken;
