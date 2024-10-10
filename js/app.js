@@ -81,9 +81,9 @@ const locations = [
     //locations[0]
     name: "Town",
     buttonText: ["Shop", "Forest", "Dragon Den", "???"],
-    text: "You are now standing at the town square. To your left is the store. Up ahead is the forest. To the right of the town, lies the fearsome Dragon. You heard of how the health of the townsfolk have suffered ever since the dragon appeared, and causing the surrounding monsters to be agressive towards any who transpasses.",
-    text2:
-      `The town square is bustling with people. You recognised old Granny Emma, who always greets you when you returned to town from your adventures, walking towards you.\n
+    text: `You are now standing at the town square. To your left is the store. Up ahead is the forest. To the right of the town, lies the Den where the fearsome Dragon reside.\n
+    You heard of how the health of the townsfolks have suffered ever since the dragon appeared, and causing the surrounding monsters to be agressive towards any who transpasses. Granny Emma greets you warmly, before breaking into a series of cough and wheezing. Bless the soul of Granny Emma. `,
+    text2: `The town square is bustling with people. You recognised Granny Emma, who always greets you when you returned to town from your adventures, walking towards you.\n
       Granny Emma grabs you on your arm, and with a wide smile on her face, lets you know that the persistent cough she had, is no longer bothering her.\nShe gestured to the crowd in front of the store, and said that many of the townfolks' condition have alivated. However, Granny Emma mentioned that I should still be cautious when entering the Forest and beyond.\n
       Now that you have defeated the dragon, you can't help but wonder is there really only ONE dragon? Wait a minute....what's that??`,
     image:
@@ -94,7 +94,7 @@ const locations = [
     //locations[1]
     name: "Shop",
     buttonText: ["Town", "Buy HP: 10 gold", "Buy Weapon", "WARNING: 10 gold"],
-    text: "Ah, an adventurer! Come now, what can I do for you?",
+    text: '"Ah, an adventurer! Come now, what can I do for you?"',
     image:
       "https://image.lexica.art/full_webp/2cce2637-98ef-4e49-9682-aa352dbad992",
     alt: "shop front",
