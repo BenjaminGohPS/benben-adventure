@@ -16,7 +16,7 @@ After cloning the repo to your computer, simply open the folder, and look for th
 
 Alternatively, you may try the deployed game [here](https://benjamingohps.github.io/benben-adventure/)
 
-# Attributions:
+# Attributions
 
 For designs, I have used bootstrap for the buttons, and the overall html styling. Bootstrap was also used for the popover found in JavaScript:-
 
