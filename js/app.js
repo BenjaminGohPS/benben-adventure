@@ -487,7 +487,6 @@ const goAttack = () => {
   //attack codes
 
   let currentMonsterHp = monsterHp.innerText;
-
   if (currentMonsterHp > 1) {
     let humanAttack =
       Math.floor(Math.random() * xp) + weapons[currentWeaponIndex].power;

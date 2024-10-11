@@ -14,6 +14,8 @@ I have always enjoyed point and click elements, and the story in such games. Gam
 
 After cloning the repo to your computer, simply open the folder, and look for the index.html file. Open the index.html in your browser, and you are good to go exploring!
 
+Alternatively, you may try the deployed game [here](https://benjamingohps.github.io/benben-adventure/)
+
 # Attributions:
 
 For designs, I have used bootstrap for the buttons, and the overall html styling. Bootstrap was also used for the popover found in JavaScript:-
